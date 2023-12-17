@@ -1,0 +1,94 @@
+/* Global CSS */
+
+:root {
+  /* Variables */
+  --fluid-width: 90vw;
+  --max-width: 1120px;
+  --fixed-width: 600px;
+  --nav-height: 6rem;
+  --border-radius: 0.3rem;
+  --letter-spacing: 1px;
+  --transition: 0.2s ease-in-out all;
+
+  /* Colors */
+  --primary-50: #f5f8f5;
+  --primary-100: #e7f1e8;
+  --primary-200: #d0e2d3;
+  --primary-300: #abcab0;
+  --primary-400: #7eaa86;
+  --primary-500: #5b8c64;
+  --primary-600: #47724f;
+  --primary-700: #3a5a40;
+  --primary-800: #324937;
+  --primary-900: #2a3d2e;
+  --primary-950: #132016;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont,  Roboto;
+  font-weight: 450;
+  line-height: 1;
+}
+
+.container {
+  width: var(--fluid-width);
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.img {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+p {
+  margin: 0;
+}
+h1,
+h2,
+h3,
+h4,
+h5 {
+  margin: 0;
+  font-weight: 400;
+  line-height: 1;
+  text-transform: capitalize;
+  letter-spacing: var(--letter-spacing);
+}
+
+h1 {
+  font-size: clamp(2rem, 5vw, 5rem);
+}
+
+h2 {
+  font-size: clamp(1.75rem, 4vw, 4rem);
+}
+
+h3 {
+  font-size: clamp(1.5rem, 3vw, 3rem); 
+}
+
+h4 {
+  font-size: clamp(1.25rem, 2vw, 2rem); 
+}
+
+h5 {
+  font-size: clamp(1rem, 1.5vw, 1.5rem); /
+}
+
+.btn {
+  cursor: pointer;
+  color: white;
+  background: var(--primary-600);
+  border-radius: var(--border-radius);
+  letter-spacing: var(--letter-spacing);
+  padding: 0.4rem 0.1rem;
+  box-shadow: var(--shadow-1);
+  transition: var(--transition);
+  display: inline-block;
+}
+.btn:hover {
+  background: var(--primary-800);
+  box-shadow: var(--shadow-3);
+}
