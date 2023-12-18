@@ -11,12 +11,12 @@ const Register = () => {
         <FormRow type='text' name='lastName' labelText='last name' />
         <FormRow type='email' name='email' />
         <FormRow type='password' name='password' />
-        <button type='submit' className='btn btn-block'>
+        <button type='submit' className='button button-block'>
           Submit
         </button>
         <p>
           Already have an account?
-          <Link to='/login' className='member-btn'>
+          <Link to='/login' className='member-button'>
             Login
           </Link>
         </p>

@@ -16,11 +16,11 @@ const Wrapper = styled.section`
     margin-top: 1rem;
     text-align: center;
   }
-  .btn {
+  .button {
     margin-top: 1rem;
     font-weight: 550;
   }
-  .member-btn {
+  .member-button {
     color: var(--primary-600);
     letter-spacing: var(--letter-spacing);
     margin-left: 0.3rem;

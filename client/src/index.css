@@ -97,7 +97,7 @@ body {
 }
 .form-input,
 .form-select,
-.form-btn {
+.form-button {
   height: 35px;
 }
 .form-row {
@@ -167,7 +167,7 @@ h5 {
   font-size: clamp(1rem, 1.5vw, 1.5rem);
 }
 
-.btn {
+.button {
   cursor: pointer;
   color: white;
   background: var(--primary-600);
@@ -178,10 +178,10 @@ h5 {
   display: inline-block;
   border: transparent;
 }
-.btn:hover {
+.button:hover {
   background: var(--primary-800);
   box-shadow: var(--shadow-3);
 }
-.btn-block {
+.button-block {
   width: 100%;
 }

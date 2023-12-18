@@ -1,11 +1,11 @@
 import Wrapper from '../assets/wrappers/SmallSidebar';
-import { useDashBoardContext } from '../pages/DashboardLayout';
+import { useDashboardContext } from '../pages/DashboardLayout';
 import CloseIcon from '@mui/icons-material/Close';
 import LocalDiningIcon from '@mui/icons-material/LocalDining';
 import SidebarNav from './SidebarNav';
 
 const SmallSidebar = () => {
-  const { showSidebar, toggleSidebar } = useDashBoardContext();
+  const { showSidebar, toggleSidebar } = useDashboardContext();
 
   return (
     <Wrapper>
@@ -15,7 +15,11 @@ const SmallSidebar = () => {
         }
       >
         <div className='content'>
-          <button type='button' className='close-btn' onClick={toggleSidebar}>
+          <button
+            type='button'
+            className='close-button'
+            onClick={toggleSidebar}
+          >
             <CloseIcon fontSize='large' />
           </button>
           <header>

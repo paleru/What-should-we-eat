@@ -13,7 +13,7 @@ const Wrapper = styled.nav`
     align-items: center;
     width: 90vw;
   }
-  .toggle-btn {
+  .toggle-button {
     background: transparent;
     border-color: transparent;
     color: var(--primary-600);
@@ -23,7 +23,7 @@ const Wrapper = styled.nav`
     font-size: 1.75rem;
   }
 
-  .btn-container {
+  .button-container {
     display: flex;
     align-items: center;
   }

@@ -9,20 +9,20 @@ const Login = () => {
         <h4>login</h4>
         <FormRow type='email' name='email' />
         <FormRow type='password' name='password' />
-        <button type='submit' className='btn btn-block'>
+        <button type='submit' className='button button-block'>
           Submit
         </button>
-        {/*         <button type='button' className='btn btn-block'>
+        {/*         <button type='button' className='button button-block'>
           Use as guest
         </button> */}
         <p>
           Don't have an account?
-          <Link to='/register' className='member-btn'>
+          <Link to='/register' className='member-button'>
             Register here
           </Link>
           <br></br>
           Don't want to?
-          <Link to='/dashboard' className='member-btn'>
+          <Link to='/dashboard' className='member-button'>
             Use as guest
           </Link>
         </p>

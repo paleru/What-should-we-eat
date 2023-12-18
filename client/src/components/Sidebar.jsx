@@ -1,9 +1,9 @@
 import Wrapper from '../assets/wrappers/Sidebar';
-import { useDashBoardContext } from '../pages/DashboardLayout';
+import { useDashboardContext } from '../pages/DashboardLayout';
 import SidebarNav from './SidebarNav';
 
 const Sidebar = () => {
-  const { showSidebar } = useDashBoardContext();
+  const { showSidebar } = useDashboardContext();
 
   return (
     <Wrapper>
