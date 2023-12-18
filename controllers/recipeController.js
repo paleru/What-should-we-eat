@@ -1,20 +1,10 @@
-let recipes = [
-  {
-    id: '1',
-    title: 'pasta bolognese',
-    description: "Everyone's favorite comfort food",
-    ingredients: ['tomato', 'beef', 'basil'],
-  },
-  {
-    id: '2',
-    title: 'pizza',
-    description: "Even if it's bad it's good",
-    ingredients: ['tomato', 'mozzarella', 'pepperoni'],
-  },
-];
+import RecipeModel from '../models/RecipeModel.js';
+import { StatusCodes } from 'http-status-codes';
+import { NotFoundError } from '../errors/customErrors.js';
 
 export const getRecipes = async (req, res) => {
-  res.status(200).json({ recipes });
+  const recipes = await RecipeModel.find({});
+  res.status(StatusCodes.OK).json({ recipes });
 };
 
 export const getRecipesByIngredients = async (req, res) => {
@@ -51,64 +41,59 @@ export const getRecipesByIngredients = async (req, res) => {
       .json({ msg: 'No recipes matching the provided ingredients' });
   }
 
-  res.status(200).json({ recipes: matchingRecipes });
+  res.status(StatusCodes.OK).json({ recipes: matchingRecipes });
 };
 
 export const getRecipeById = async (req, res) => {
   const { id } = req.params;
-  const recipe = recipes.find((recipe) => recipe.id === id);
-  if (!recipe) {
-    return res.status(404).json({ msg: `no recipe matching id ${id}` });
-  }
-  res.status(200).json({ recipe });
+
+  const recipe = await RecipeModel.findById(id);
+  if (!recipe) throw new NotFoundError(`no recipe matching id ${id}`);
+  res.status(StatusCodes.OK).json({ recipe });
 };
 
 export const editRecipeById = async (req, res) => {
-  const { title, description, ingredients } = req.body;
-  if (!title || !description || !ingredients) {
-    return res.status(400).json({
-      msg: 'Please provide a title, recipe and ingredients for your recipe',
-    });
-  }
   const { id } = req.params;
-  const recipe = recipes.find((recipe) => recipe.id === id);
-  if (!recipe) {
-    return res.status(404).json({ msg: `no recipe matching id ${id}` });
-  }
-  recipe.title = title;
-  recipe.description = description;
-  recipe.ingredients = ingredients;
 
-  res.status(200).json({ msg: 'recipe updated', recipe });
+  const updatedRecipe = await RecipeModel.findByIdAndUpdate(id, req.body, {
+    new: true,
+  });
+  if (!updatedRecipe) throw new NotFoundError(`no recipe matching id ${id}`);
+
+  res
+    .status(StatusCodes.OK)
+    .json({ msg: 'recipe updated', recipe: updatedRecipe });
 };
 
 export const deleteRecipeById = async (req, res) => {
   const { id } = req.params;
-  const recipe = recipes.find((recipe) => recipe.id === id);
-  if (!recipe) {
-    return res.status(404).json({ msg: `no recipe matching id ${id}` });
-  }
+  const deletedRecipe = await RecipeModel.findByIdAndDelete(id);
 
-  const newRecipes = recipes.filter((recipe) => recipe.id !== id);
-  recipes = newRecipes;
+  if (!deletedRecipe) throw new NotFoundError(`no recipe matching id ${id}`);
 
-  res.status(200).json({ msg: 'recipe deleted' });
+  res.status(StatusCodes.OK).json({ msg: 'recipe deleted' });
 };
 
 export const addRecipe = async (req, res) => {
-  const { title, description, ingredients } = req.body;
-  if (!title || !description || !ingredients) {
+  const { title, steps, ingredients, type } = req.body;
+
+  if (!title || !steps || !ingredients || !type) {
     return res.status(400).json({
-      msg: 'Please provide a title, recipe and ingredients for your recipe',
+      msg: 'Please provide a title, steps and ingredients for your recipe',
     });
   }
-  const id = '3';
-  const recipe = {
-    id,
-    title,
-    description,
-    ingredients,
-  };
-  recipes.push(recipe);
-  res.status(201).json({ recipe });
+
+  try {
+    const recipe = await RecipeModel.create({
+      title,
+      steps,
+      ingredients,
+      type,
+    });
+    res.status(StatusCodes.CREATED).json({ recipe });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ msg: 'Error creating recipe', error: error.message });
+  }
 };
