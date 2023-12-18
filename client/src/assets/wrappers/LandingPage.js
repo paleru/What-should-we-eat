@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const LandingWrapper = styled.section`
+const Wrapper = styled.section`
   nav {
     width: var(--fluid-width);
     max-width: var(--max-width);
@@ -31,7 +31,7 @@ const LandingWrapper = styled.section`
   .register-link {
     margin-right: 1rem;
   }
-  .logo {
+  .main {
     display: none;
   }
   .btn {
@@ -48,4 +48,4 @@ const LandingWrapper = styled.section`
   }
 `;
 
-export default LandingWrapper;
+export default Wrapper;

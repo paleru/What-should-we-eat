@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const ErrorWrapper = styled.main`
+const Wrapper = styled.main`
   min-height: 100vh;
   text-align: center;
   display: flex;
@@ -24,4 +24,4 @@ const ErrorWrapper = styled.main`
   }
 `;
 
-export default ErrorWrapper;
+export default Wrapper;
