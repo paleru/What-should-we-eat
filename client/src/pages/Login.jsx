@@ -12,13 +12,18 @@ const Login = () => {
         <button type='submit' className='btn btn-block'>
           Submit
         </button>
-        <button type='button' className='btn btn-block'>
+        {/*         <button type='button' className='btn btn-block'>
           Use as guest
-        </button>
+        </button> */}
         <p>
           Don't have an account?
           <Link to='/register' className='member-btn'>
             Register here
+          </Link>
+          <br></br>
+          Don't want to?
+          <Link to='/dashboard' className='member-btn'>
+            Use as guest
           </Link>
         </p>
       </form>

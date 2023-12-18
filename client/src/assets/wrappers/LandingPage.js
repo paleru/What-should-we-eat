@@ -37,7 +37,7 @@ const Wrapper = styled.section`
   .btn {
     padding: 0.75rem 1rem;
   }
-  @media (min-width: 992px) {
+  @media (min-width: 800px) {
     .page {
       grid-template-columns: 1fr 400px;
       column-gap: 3rem;

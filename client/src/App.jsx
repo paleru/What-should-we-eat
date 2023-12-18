@@ -6,6 +6,10 @@ import {
   Login,
   DashboardLayout,
   Error,
+  FindRecipe,
+  Profile,
+  AddRecipe,
+  Admin,
 } from './pages';
 
 const router = createBrowserRouter([
@@ -29,6 +33,24 @@ const router = createBrowserRouter([
       {
         path: 'dashboard',
         element: <DashboardLayout />,
+        children: [
+          {
+            index: true,
+            element: <FindRecipe />,
+          },
+          {
+            path: 'add-recipe',
+            element: <AddRecipe />,
+          },
+          {
+            path: 'profile',
+            element: <Profile />,
+          },
+          {
+            path: 'admin',
+            element: <Admin />,
+          },
+        ],
       },
     ],
   },
