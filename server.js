@@ -5,14 +5,17 @@ import express from 'express';
 const app = express();
 import morgan from 'morgan';
 import mongoose from 'mongoose';
+import cookieParser from 'cookie-parser';
 
 //router
 import recipeRouter from './routes/recipeRouter.js';
 import authRouter from './routes/authRouter.js';
 
-//error handler
+//middleware
 import errorHandlerMiddleware from './middleware/errorHandlerMiddleware.js';
+import { authMiddleware } from './middleware/authMiddleware.js';
 
+app.use(cookieParser());
 app.use(express.json());
 
 if (process.env.NODE_ENV === 'development') {
@@ -23,7 +26,7 @@ app.get('/', (req, res) => {
   res.send('Hello World');
 });
 
-app.use('/api/v1/recipes', recipeRouter);
+app.use('/api/v1/recipes', authMiddleware, recipeRouter);
 app.use('/api/v1/auth', authRouter);
 
 app.use('*', (req, res) => {

@@ -4,6 +4,7 @@ import {
   getRecipes,
   getRecipesByIngredients,
   getRecipeById,
+  getOwnRecipes,
   addRecipe,
   editRecipeById,
   deleteRecipeById,
@@ -12,9 +13,11 @@ import {
 import {
   validateRecipeInput,
   validateRecipeId,
+  validateRecipeOwnership,
 } from '../middleware/validationMiddleware.js';
 
 recipeRouter.get('/', getRecipes);
+recipeRouter.get('/own', getOwnRecipes);
 recipeRouter.get('/by-ingredients', getRecipesByIngredients);
 recipeRouter.get('/:id', validateRecipeId, getRecipeById);
 recipeRouter.post('/', validateRecipeInput, addRecipe);
@@ -22,8 +25,14 @@ recipeRouter.patch(
   '/:id',
   validateRecipeInput,
   validateRecipeId,
+  validateRecipeOwnership,
   editRecipeById
 );
-recipeRouter.delete('/:id', validateRecipeId, deleteRecipeById);
+recipeRouter.delete(
+  '/:id',
+  validateRecipeId,
+  validateRecipeOwnership,
+  deleteRecipeById
+);
 
 export default recipeRouter;

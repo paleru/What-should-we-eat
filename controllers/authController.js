@@ -3,6 +3,7 @@ import { StatusCodes } from 'http-status-codes';
 import bcrypt from 'bcryptjs';
 import UserModel from '../models/UserModel.js';
 import { UnauthenticatedError } from '../errors/customErrors.js';
+import { createToken } from '../utils/tokenUtils.js';
 
 export const register = async (req, res) => {
   const salt = await bcrypt.genSalt();
@@ -25,5 +26,23 @@ export const login = async (req, res) => {
   if (!isPasswordCorrect)
     throw new UnauthenticatedError('invalid login credentials');
 
-  res.send('login route');
+  const token = createToken({ userId: user._id, role: user.role });
+
+  // expires in one day in milliseconds since 1970
+  res.cookie('token', token, {
+    httpOnly: true,
+    expires: new Date(Date.now() + 86400000),
+    secure: process.env.NODE_ENV === 'production',
+  });
+
+  res.status(StatusCodes.OK).json({ message: 'user logged in' });
+};
+
+export const logout = async (req, res) => {
+  res.cookie('token', 'logout', {
+    httpOnly: true,
+    expires: new Date(Date.now()),
+  });
+
+  res.status(StatusCodes.OK).json({ message: 'user logged out' });
 };

@@ -1,9 +1,13 @@
 import RecipeModel from '../models/RecipeModel.js';
 import { StatusCodes } from 'http-status-codes';
-import { NotFoundError } from '../errors/customErrors.js';
 
 export const getRecipes = async (req, res) => {
   const recipes = await RecipeModel.find({});
+  res.status(StatusCodes.OK).json({ recipes });
+};
+
+export const getOwnRecipes = async (req, res) => {
+  const recipes = await RecipeModel.find({ createdBy: req.user.userId });
   res.status(StatusCodes.OK).json({ recipes });
 };
 
@@ -60,6 +64,7 @@ export const deleteRecipeById = async (req, res) => {
 };
 
 export const addRecipe = async (req, res) => {
+  req.body.createdBy = req.user.userId;
   const recipe = await RecipeModel.create(req.body);
   res.status(StatusCodes.CREATED).json({ recipe });
 };

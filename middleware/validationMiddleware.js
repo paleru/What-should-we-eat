@@ -1,5 +1,9 @@
 import { body, param, validationResult } from 'express-validator';
-import { BadRequestError, NotFoundError } from '../errors/customErrors.js';
+import {
+  BadRequestError,
+  NotFoundError,
+  UnauthorizedError,
+} from '../errors/customErrors.js';
 import mongoose from 'mongoose';
 import RecipeModel from '../models/RecipeModel.js';
 import UserModel from '../models/UserModel.js';
@@ -15,7 +19,9 @@ const validationMiddleware = (validateValues) => {
         if (errorMessages[0].startsWith('no recipe ')) {
           throw new NotFoundError(errorMessages);
         }
-        throw new BadRequestError(errorMessages);
+        if (errorMessages[0].startsWith('not authorized')) {
+          throw new UnauthorizedError(errorMessages);
+        }
       }
       next();
     },
@@ -62,7 +68,7 @@ export const validateRecipeInput = validationMiddleware([
 ]);
 
 export const validateRecipeId = validationMiddleware([
-  param('id').custom(async (value) => {
+  param('id').custom(async (value, { req }) => {
     const isValid = mongoose.Types.ObjectId.isValid(value);
     if (!isValid) throw new BadRequestError('Invalid MongoDB id');
 
@@ -70,6 +76,21 @@ export const validateRecipeId = validationMiddleware([
     if (!recipe) throw new NotFoundError(`no recipe matching id ${value}`);
   }),
 ]);
+
+export const validateRecipeOwnership = async (req, res, next) => {
+  const { id } = req.params;
+  const recipe = await RecipeModel.findById(id);
+
+  if (!recipe) throw new NotFoundError(`no recipe found matching id`);
+
+  if (
+    recipe.createdBy.toString() !== req.user.userId &&
+    req.user.role !== 'admin'
+  )
+    throw new UnauthorizedError('not authorized to edit this recipe');
+
+  next();
+};
 
 export const validateRegisterInput = validationMiddleware([
   body('name')
