@@ -6,10 +6,9 @@ const app = express();
 import morgan from 'morgan';
 import mongoose from 'mongoose';
 
-import { validateTest } from './middleware/validationMiddleware.js';
-
 //router
 import recipeRouter from './routes/recipeRouter.js';
+import authRouter from './routes/authRouter.js';
 
 //error handler
 import errorHandlerMiddleware from './middleware/errorHandlerMiddleware.js';
@@ -24,12 +23,8 @@ app.get('/', (req, res) => {
   res.send('Hello World');
 });
 
-app.post('/api/v1/test', validateTest, (req, res) => {
-  console.log(req);
-  res.json({ message: 'data received', data: req.body });
-});
-
 app.use('/api/v1/recipes', recipeRouter);
+app.use('/api/v1/auth', authRouter);
 
 app.use('*', (req, res) => {
   res.status(404).json({ msg: 'not found' });

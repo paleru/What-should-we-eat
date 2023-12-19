@@ -3,8 +3,8 @@ import mongoose from 'mongoose';
 const ingredientSchema = new mongoose.Schema(
   {
     name: String,
-    amount: String,
-    quantity: Number,
+    amount: Number,
+    unit: String,
   },
   //to prevent mongoose from creating an _id field for each ingredient
   { _id: false }

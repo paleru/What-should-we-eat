@@ -9,11 +9,21 @@ import {
   deleteRecipeById,
 } from '../controllers/recipeController.js';
 
+import {
+  validateRecipeInput,
+  validateRecipeId,
+} from '../middleware/validationMiddleware.js';
+
 recipeRouter.get('/', getRecipes);
 recipeRouter.get('/by-ingredients', getRecipesByIngredients);
-recipeRouter.get('/:id', getRecipeById);
-recipeRouter.post('/', addRecipe);
-recipeRouter.patch('/:id', editRecipeById);
-recipeRouter.delete('/:id', deleteRecipeById);
+recipeRouter.get('/:id', validateRecipeId, getRecipeById);
+recipeRouter.post('/', validateRecipeInput, addRecipe);
+recipeRouter.patch(
+  '/:id',
+  validateRecipeInput,
+  validateRecipeId,
+  editRecipeById
+);
+recipeRouter.delete('/:id', validateRecipeId, deleteRecipeById);
 
 export default recipeRouter;
