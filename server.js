@@ -27,6 +27,10 @@ app.get('/', (req, res) => {
   res.send('Hello World');
 });
 
+app.get('/api/v1/test', (req, res) => {
+  res.json({ msg: 'test' });
+});
+
 app.use('/api/v1/recipes', authMiddleware, recipeRouter);
 app.use('/api/v1/users', authMiddleware, userRouter);
 app.use('/api/v1/auth', authRouter);
