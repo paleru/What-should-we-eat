@@ -3,8 +3,8 @@ import { StatusCodes } from 'http-status-codes';
 const errorHandlerMiddleware = (err, req, res, next) => {
   console.log(err);
   const statusCode = err.statusCode || StatusCodes.INTERNAL_SERVER_ERROR;
-  const message = err.message || 'internal server error';
-  res.status(statusCode).json({ message });
+  const msg = err.message || 'internal server error';
+  res.status(statusCode).json({ msg });
 };
 
 export default errorHandlerMiddleware;

@@ -1,4 +1,3 @@
-import User from '../models/UserModel.js';
 import { StatusCodes } from 'http-status-codes';
 import bcrypt from 'bcryptjs';
 import UserModel from '../models/UserModel.js';
@@ -10,7 +9,7 @@ export const register = async (req, res) => {
   const hashedPassword = await bcrypt.hash(req.body.password, salt);
   req.body.password = hashedPassword;
 
-  const user = await User.create(req.body);
+  const user = await UserModel.create(req.body);
   res.status(StatusCodes.CREATED).json({ message: 'user created' });
 };
 

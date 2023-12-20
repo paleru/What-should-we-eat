@@ -21,6 +21,7 @@ const validationMiddleware = (validateValues) => {
         if (errorMessages[0].startsWith('not authorized')) {
           throw new UnauthorizedError(errorMessages);
         }
+        throw new BadRequestError(errorMessages);
       }
       next();
     },
@@ -28,37 +29,19 @@ const validationMiddleware = (validateValues) => {
 };
 
 export const validateRecipeInput = validationMiddleware([
-  body('ingredients')
-    .notEmpty()
-    .withMessage('ingredients is required')
-    .isArray({ min: 1 })
-    .withMessage('ingredients must be an array with at least one element'),
+  body('ingredients').notEmpty().withMessage('ingredients is required'),
   body('ingredients.*.name')
     .notEmpty()
-    .withMessage('ingredient name is required')
-    .isLength({ min: 3, max: 50 })
-    .withMessage('ingredient name must be between 3 and 50 characters')
-    .trim(),
+    .withMessage('ingredient name is required'),
   body('ingredients.*.amount')
     .optional()
     .isNumeric()
     .withMessage('ingredient amount must be a number'),
   body('ingredients.*.unit')
     .notEmpty()
-    .withMessage('ingredient unit is required')
-    .isLength({ min: 1, max: 50 })
-    .withMessage('ingredient unit must be between 1 and 50 characters')
-    .trim(),
-  body('title')
-    .notEmpty()
-    .withMessage('title is required')
-    .isLength({ min: 1, max: 50 })
-    .withMessage('title must be between 1 and 50 characters'),
-  body('steps')
-    .notEmpty()
-    .withMessage('steps required')
-    .isArray({ min: 1, max: 30 })
-    .withMessage('recipe must contain at least one step and no more than 30'),
+    .withMessage('ingredient unit is required'),
+  body('title').notEmpty().withMessage('title is required'),
+  body('steps').notEmpty().withMessage('steps required'),
   body('type')
     .notEmpty()
     .withMessage('type is required')
@@ -94,20 +77,19 @@ export const validateRecipeOwnership = async (req, res, next) => {
 };
 
 export const validateRegisterInput = validationMiddleware([
-  body('name')
-    .notEmpty()
-    .withMessage('name is required')
-    .isLength({ min: 1, max: 40 })
-    .withMessage('name must be between 1 and 50 characters')
-    .trim(),
+  body('name').notEmpty().withMessage('name is required'),
   body('email')
     .notEmpty()
     .withMessage('email is required')
     .isEmail()
     .withMessage('email must be a valid email address')
     .custom(async (email) => {
+      console.log('Checking email:', email);
       const user = await UserModel.findOne({ email });
-      if (user) throw new BadRequestError('email already in use');
+      console.log('Found user:', user);
+      if (user) {
+        throw new BadRequestError('email already in use');
+      }
     }),
   body('password')
     .notEmpty()
