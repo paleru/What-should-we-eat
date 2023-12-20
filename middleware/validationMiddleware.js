@@ -8,6 +8,7 @@ import mongoose from 'mongoose';
 import RecipeModel from '../models/RecipeModel.js';
 import UserModel from '../models/UserModel.js';
 
+// Middleware to validate request body
 const validationMiddleware = (validateValues) => {
   return [
     validateValues,
@@ -28,6 +29,7 @@ const validationMiddleware = (validateValues) => {
   ];
 };
 
+//validate input in recipe post request body
 export const validateRecipeInput = validationMiddleware([
   body('ingredients').notEmpty().withMessage('ingredients is required'),
   body('ingredients.*.name')
@@ -49,7 +51,7 @@ export const validateRecipeInput = validationMiddleware([
     .withMessage('type must be one of breakfast, lunch, dinner, snack'),
 ]);
 
-//validate that recipe exists
+//validate that recipe witch matching id exists
 export const validateRecipeId = validationMiddleware([
   param('id').custom(async (value, { req }) => {
     const isValid = mongoose.Types.ObjectId.isValid(value);
@@ -60,7 +62,7 @@ export const validateRecipeId = validationMiddleware([
   }),
 ]);
 
-// validate that user is authorized to edit recipe
+// validate that user is owner and authorized to edit recipe
 export const validateRecipeOwnership = async (req, res, next) => {
   const { id } = req.params;
   const recipe = await RecipeModel.findById(id);
@@ -76,6 +78,7 @@ export const validateRecipeOwnership = async (req, res, next) => {
   next();
 };
 
+//validate input in user registration request body
 export const validateRegisterInput = validationMiddleware([
   body('name').notEmpty().withMessage('name is required'),
   body('email')
@@ -113,6 +116,7 @@ export const validateLogin = validationMiddleware([
   body('password').notEmpty().withMessage('password is required'),
 ]);
 
+//validate input in user update request body
 export const validateUpdateUser = validationMiddleware([
   body('name')
     .notEmpty()

@@ -1,11 +1,13 @@
 import RecipeModel from '../models/RecipeModel.js';
 import { StatusCodes } from 'http-status-codes';
 
+//get all recipes
 export const getRecipes = async (req, res) => {
   const recipes = await RecipeModel.find({});
   res.status(StatusCodes.OK).json({ recipes });
 };
 
+//get all recipes created by current user
 export const getOwnRecipes = async (req, res) => {
   const recipes = await RecipeModel.find({ createdBy: req.user.userId });
   res.status(StatusCodes.OK).json({ recipes });
@@ -17,7 +19,7 @@ export const getRecipesByIngredients = async (req, res) => {
   if (!ingredients) {
     return res
       .status(StatusCodes.BAD_REQUEST)
-      .json({ message: 'Ingredients query parameter is required' });
+      .json({ message: 'Ingredient(s) required' });
   }
 
   const ingredientList = ingredients

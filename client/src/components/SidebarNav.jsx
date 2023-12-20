@@ -3,6 +3,7 @@ import links from '../utils/sidebarItems';
 import { NavLink } from 'react-router-dom';
 
 const SidebarNav = ({ isBig }) => {
+  //toggle if sidebar is open or not
   const { toggleSidebar, user } = useDashboardContext();
   return (
     <div className='nav-links'>

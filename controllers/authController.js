@@ -4,6 +4,7 @@ import UserModel from '../models/UserModel.js';
 import { UnauthenticatedError } from '../errors/customErrors.js';
 import { createToken } from '../utils/tokenUtils.js';
 
+//create a new user with hashed password
 export const register = async (req, res) => {
   const salt = await bcrypt.genSalt();
   const hashedPassword = await bcrypt.hash(req.body.password, salt);
@@ -13,6 +14,7 @@ export const register = async (req, res) => {
   res.status(StatusCodes.CREATED).json({ message: 'user created' });
 };
 
+//login user and create token
 export const login = async (req, res) => {
   const user = await UserModel.findOne({ email: req.body.email });
   if (!user) throw new UnauthenticatedError('invalid login credentials');

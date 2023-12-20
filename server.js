@@ -19,6 +19,7 @@ import { authMiddleware } from './middleware/authMiddleware.js';
 app.use(cookieParser());
 app.use(express.json());
 
+//dev logging
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
@@ -31,6 +32,7 @@ app.get('/api/v1/test', (req, res) => {
   res.json({ msg: 'test' });
 });
 
+//base request-url's and routing
 app.use('/api/v1/recipes', authMiddleware, recipeRouter);
 app.use('/api/v1/users', authMiddleware, userRouter);
 app.use('/api/v1/auth', authRouter);
@@ -43,6 +45,7 @@ app.use(errorHandlerMiddleware);
 
 const port = process.env.PORT || 5001;
 
+//connect to db and start server
 try {
   await mongoose.connect(process.env.MONGO_URI);
   app.listen(port, () => {

@@ -7,6 +7,7 @@ import {
 } from '../middleware/validationMiddleware.js';
 import { logout } from '../controllers/authController.js';
 
+//routes with validation middleware
 authRouter.post('/register', validateRegisterInput, register);
 authRouter.post('/login', validateLogin, login);
 authRouter.get('/logout', logout);

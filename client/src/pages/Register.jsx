@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 
 import baseAxiosFetch from '../utils/baseAxiosFetch';
 
+//checks register attempt and redirects to login if successful
 export const action = async ({ request }) => {
   const formData = await request.formData();
   const data = Object.fromEntries(formData);
@@ -20,9 +21,10 @@ export const action = async ({ request }) => {
 };
 
 const Register = () => {
+  //submitting is a boolean that is true when the form is submitting
   const navigation = useNavigation();
-  console.log(navigation);
   const submitting = navigation.state.submitting;
+
   return (
     <Wrapper>
       <Form method='post' className='form'>

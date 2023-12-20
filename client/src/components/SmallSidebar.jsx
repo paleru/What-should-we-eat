@@ -4,6 +4,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import LocalDiningIcon from '@mui/icons-material/LocalDining';
 import SidebarNav from './SidebarNav';
 
+//sidebar for devices with smaller screens < 800px
 const SmallSidebar = () => {
   const { showSidebar, toggleSidebar } = useDashboardContext();
 

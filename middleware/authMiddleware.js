@@ -1,6 +1,7 @@
 import { UnauthenticatedError } from '../errors/customErrors.js';
 import { verifyToken } from '../utils/tokenUtils.js';
 
+// Middleware to check if user is authenticated/check if token is valid
 export const authMiddleware = (req, res, next) => {
   const { token } = req.cookies;
   if (!token) throw new UnauthenticatedError('Authentication invalid');
@@ -13,6 +14,7 @@ export const authMiddleware = (req, res, next) => {
   }
 };
 
+// Middleware to check if user role is admin
 export const authAdmin = (...rest) => {
   return (req, res, next) => {
     if (!rest.includes(req.user.role)) {

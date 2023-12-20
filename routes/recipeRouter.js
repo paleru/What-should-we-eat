@@ -16,6 +16,7 @@ import {
   validateRecipeOwnership,
 } from '../middleware/validationMiddleware.js';
 
+//routes with validation middleware
 recipeRouter.get('/', getRecipes);
 recipeRouter.get('/own', getOwnRecipes);
 recipeRouter.get('/by-ingredients', getRecipesByIngredients);

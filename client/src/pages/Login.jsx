@@ -4,6 +4,7 @@ import { FormRow } from '../components';
 import baseAxiosFetch from '../utils/baseAxiosFetch';
 import { toast } from 'react-toastify';
 
+//checks login attempt and redirects to dashboard if successful
 export const action = async ({ request }) => {
   const formData = await request.formData();
   const data = Object.fromEntries(formData);

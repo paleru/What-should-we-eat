@@ -6,7 +6,7 @@ const ingredientSchema = new mongoose.Schema(
     amount: Number,
     unit: String,
   },
-  //to prevent mongoose from creating an _id field for each ingredient
+  //prevent mongoose from creating an _id field for each ingredient in ingredients subschema
   { _id: false }
 );
 
