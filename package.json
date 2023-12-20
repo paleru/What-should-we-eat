@@ -4,8 +4,10 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "nodemon server.js",
-    "project-setup": "npm install && cd client && npm install"
+    "project-setup": "npm install && cd client && npm install",
+    "server": "nodemon server",
+    "client": "cd client && npm run dev",
+    "dev": "concurrently --kill-others-on-fail \" npm run server\" \" npm run client\" "
   },
   "dependencies": {
     "@tanstack/react-query": "^4.29.5",
