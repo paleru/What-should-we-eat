@@ -1,7 +1,7 @@
 import { UnauthenticatedError } from '../errors/customErrors.js';
 import { verifyToken } from '../utils/tokenUtils.js';
 
-export const authMiddleware = async (req, res, next) => {
+export const authMiddleware = (req, res, next) => {
   const { token } = req.cookies;
   if (!token) throw new UnauthenticatedError('Authentication invalid');
   try {

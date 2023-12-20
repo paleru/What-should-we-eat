@@ -9,6 +9,7 @@ import cookieParser from 'cookie-parser';
 
 //router
 import recipeRouter from './routes/recipeRouter.js';
+import userRouter from './routes/userRouter.js';
 import authRouter from './routes/authRouter.js';
 
 //middleware
@@ -27,6 +28,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/v1/recipes', authMiddleware, recipeRouter);
+app.use('/api/v1/users', authMiddleware, userRouter);
 app.use('/api/v1/auth', authRouter);
 
 app.use('*', (req, res) => {

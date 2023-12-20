@@ -67,6 +67,7 @@ export const validateRecipeInput = validationMiddleware([
     .withMessage('type must be one of breakfast, lunch, dinner, snack'),
 ]);
 
+//validate that recipe exists
 export const validateRecipeId = validationMiddleware([
   param('id').custom(async (value, { req }) => {
     const isValid = mongoose.Types.ObjectId.isValid(value);
@@ -77,6 +78,7 @@ export const validateRecipeId = validationMiddleware([
   }),
 ]);
 
+// validate that user is authorized to edit recipe
 export const validateRecipeOwnership = async (req, res, next) => {
   const { id } = req.params;
   const recipe = await RecipeModel.findById(id);
@@ -128,4 +130,31 @@ export const validateLogin = validationMiddleware([
     .isEmail()
     .withMessage('email must be a valid email address'),
   body('password').notEmpty().withMessage('password is required'),
+]);
+
+export const validateUpdateUser = validationMiddleware([
+  body('name')
+    .notEmpty()
+    .withMessage('name is required')
+    .isLength({ min: 1, max: 40 })
+    .withMessage('name must be between 1 and 50 characters')
+    .trim(),
+  body('email')
+    .notEmpty()
+    .withMessage('email is required')
+    .isEmail()
+    .withMessage('email must be a valid email address')
+    // check if email is already in use by another user when updating
+    .custom(async (email, { req }) => {
+      const user = await UserModel.findOne({ email });
+      if (user && user._id.toString() !== req.user.userId) {
+        throw new BadRequestError('email already in use');
+      }
+    }),
+  body('lastName')
+    .notEmpty()
+    .withMessage('last name is required')
+    .isLength({ min: 1, max: 50 })
+    .withMessage('lastName must be between 1 and 50 characters')
+    .trim(),
 ]);
