@@ -1,6 +1,7 @@
 import { Link, Form, redirect, useNavigation } from 'react-router-dom';
 import Wrapper from '../assets/wrappers/RegisterAndLoginPage';
 import { FormRow } from '../components';
+import { toast } from 'react-toastify';
 
 import baseAxiosFetch from '../utils/baseAxiosFetch';
 
@@ -10,9 +11,10 @@ export const action = async ({ request }) => {
 
   try {
     await baseAxiosFetch.post('/auth/register', data);
+    toast.success('Registered successfully');
     return redirect('/login');
   } catch (error) {
-    console.log(error);
+    toast.error(error?.response?.data?.msg);
     return error;
   }
 };
