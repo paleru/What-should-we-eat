@@ -7,7 +7,6 @@ import {
 import mongoose from 'mongoose';
 import RecipeModel from '../models/RecipeModel.js';
 import UserModel from '../models/UserModel.js';
-import e from 'express';
 
 const validationMiddleware = (validateValues) => {
   return [

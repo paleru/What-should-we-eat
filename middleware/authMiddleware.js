@@ -12,3 +12,13 @@ export const authMiddleware = (req, res, next) => {
     throw new UnauthenticatedError('Authentication invalid');
   }
 };
+
+export const authAdmin = (...rest) => {
+  return (req, res, next) => {
+    if (!rest.includes(req.user.role)) {
+      throw new UnauthenticatedError('Authentication invalid');
+    }
+    console.log(rest);
+    next();
+  };
+};

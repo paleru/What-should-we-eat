@@ -8,10 +8,16 @@ export const getCurrentUser = async (req, res) => {
 };
 
 export const getAppStatistics = async (req, res) => {
-  res.status(StatusCodes.OK).json({ msg: 'stats' });
+  const users = await UserModel.countDocuments();
+  const recipes = await RecipeModel.countDocuments();
+  res.status(StatusCodes.OK).json({ users, recipes });
 };
 
 export const updateUser = async (req, res) => {
+  const obj = { ...req.body };
+  delete obj.password;
+  console.log(obj);
+
   const updatedUser = await UserModel.findByIdAndUpdate(
     req.user.userId,
     req.body,
@@ -19,5 +25,5 @@ export const updateUser = async (req, res) => {
       new: true,
     }
   );
-  res.status(StatusCodes.OK).json({ msg: 'update user' });
+  res.status(StatusCodes.OK).json({ msg: 'user updated' });
 };
