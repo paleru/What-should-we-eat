@@ -15,6 +15,7 @@ import {
 //import actions
 import { action as registerAction } from './pages/Register';
 import { action as loginAction } from './pages/Login';
+import { action as addRecipeAction } from './pages/AddRecipe';
 import { loader as dashboardLoader } from './pages/DashboardLayout';
 
 const router = createBrowserRouter([
@@ -49,6 +50,7 @@ const router = createBrowserRouter([
           {
             path: 'add-recipe',
             element: <AddRecipe />,
+            action: addRecipeAction,
           },
           {
             path: 'profile',
