@@ -4,7 +4,7 @@ import {
   FormRowSteps,
   FormRowMultiple,
 } from '../components';
-import Wrapper from '../assets/wrappers/Dashboard';
+import Wrapper from '../assets/wrappers/DashboardForm';
 import { useOutletContext } from 'react-router-dom';
 import { RECIPE_SORT_BY, RECIPE_TYPE } from '../../../utils/constants';
 import { Form, useNavigation, redirect } from 'react-router-dom';
@@ -50,39 +50,39 @@ const AddRecipe = () => {
         <h4 className='form-title'>Add Recipe</h4>
         <div className='form-center'>
           <FormRow type='text' name='title' />
-          <FormRow type='text' name='description' />
+          <FormRow type='textarea' name='description' />
 
           <FormRowMultiple
             ingredients={ingredients}
             setIngredients={setIngredients}
           />
 
-          <div className='added-ingredients'>
+          {/*           <div className='added-ingredients'>
             {ingredients.map((ingredient, index) => (
               <div key={index} className='added-ingredient'>
                 {ingredient.name} - {ingredient.amount} {ingredient.unit}
               </div>
             ))}
-          </div>
+          </div> */}
 
-          <FormRowSteps steps={steps} setSteps={setSteps} />
-          <ol className='added-steps'>
+          <FormRowSteps steps={steps} setSteps={setSteps} labelText='Steps' />
+          {/*           <ol className='added-steps'>
             {steps.map((step, index) => (
               <li key={index} className='added-steps'>
                 {step}
               </li>
             ))}
-          </ol>
+          </ol> */}
 
           <FormRowSelect
             labelText='Recipe type'
-            name='type'
+            name='recipe type'
             defaultValue='Select recipe type'
             list={Object.values(RECIPE_TYPE)}
           />
           <button
             type='submit'
-            className='btn btn-block form-btn'
+            className='button button-block form-button'
             disabled={isSubmitting}
           >
             {isSubmitting ? 'Submitting...' : 'Submit'}

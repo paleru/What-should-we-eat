@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const FormRowSteps = ({ steps, setSteps }) => {
+const FormRowSteps = ({ steps, setSteps, labelText }) => {
   const [step, setStep] = useState('');
 
   const addStep = () => {
@@ -10,14 +10,21 @@ const FormRowSteps = ({ steps, setSteps }) => {
 
   return (
     <div className='form-row'>
+      <label htmlFor='name' className='form-label'>
+        {labelText || 'Step'}
+      </label>
       <input
         type='text'
+        name='step'
         value={step}
         onChange={(e) => setStep(e.target.value)}
-        placeholder='Step'
-        required
+        className='form-input'
       />
-      <button type='button' onClick={addStep}>
+      <button
+        type='button'
+        className='button button-block form-button form-button-add'
+        onClick={addStep}
+      >
         Add Step
       </button>
     </div>
