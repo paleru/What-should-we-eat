@@ -41,6 +41,31 @@ const Wrapper = styled.section`
   .form-input-third {
     width: 30%;
   }
+
+  .added-steps {
+    padding: 1rem;
+  }
+
+  .added-ingredients {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    spacing: 1rem;
+    direction: row;
+  }
+
+  .added-ingredient {
+    margin: 0.5rem;
+    button {
+      background-color: var(--grey-700);
+      padding: 0.5rem;
+    }
+    button:hover {
+      background-color: var(--grey-900);
+    }
+  }
+
   @media (min-width: 800px) {
     .form-center {
       grid-template-columns: 1fr 1fr;

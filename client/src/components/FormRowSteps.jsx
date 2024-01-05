@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useEffect } from 'react';
 
 const FormRowSteps = ({ steps, setSteps, labelText }) => {
   const [step, setStep] = useState('');
@@ -7,6 +8,10 @@ const FormRowSteps = ({ steps, setSteps, labelText }) => {
     setSteps([...steps, step]);
     setStep('');
   };
+
+  useEffect(() => {
+    console.log(steps);
+  }, [steps]);
 
   return (
     <div className='form-row'>

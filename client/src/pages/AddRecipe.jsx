@@ -11,6 +11,7 @@ import { Form, useNavigation, redirect } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import baseAxiosFetch from '../utils/baseAxiosFetch';
 import { useState } from 'react';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 export const action = async ({ request, ingredients, steps }) => {
   const formData = new FormData(request);
@@ -44,6 +45,18 @@ const AddRecipe = () => {
     action({ request: event.target, ingredients, steps });
   };
 
+  const handleIngredientRemove = (ingredientToRemove) => {
+    const updatedIngredients = ingredients.filter(
+      (ingredient) => ingredient !== ingredientToRemove
+    );
+    setIngredients(updatedIngredients);
+  };
+
+  const handleStepRemove = (stepToRemove) => {
+    const updatedSteps = steps.filter((step) => step !== stepToRemove);
+    setSteps(updatedSteps);
+  };
+
   return (
     <Wrapper>
       <Form method='post' className='form' onSubmit={handleSubmit}>
@@ -57,22 +70,7 @@ const AddRecipe = () => {
             setIngredients={setIngredients}
           />
 
-          {/*           <div className='added-ingredients'>
-            {ingredients.map((ingredient, index) => (
-              <div key={index} className='added-ingredient'>
-                {ingredient.name} - {ingredient.amount} {ingredient.unit}
-              </div>
-            ))}
-          </div> */}
-
           <FormRowSteps steps={steps} setSteps={setSteps} labelText='Steps' />
-          {/*           <ol className='added-steps'>
-            {steps.map((step, index) => (
-              <li key={index} className='added-steps'>
-                {step}
-              </li>
-            ))}
-          </ol> */}
 
           <FormRowSelect
             labelText='Recipe type'
@@ -89,6 +87,31 @@ const AddRecipe = () => {
           </button>
         </div>
       </Form>
+      <div className='user-added'>
+        <div className='added-ingredients'>
+          {ingredients.map((ingredient, index) => (
+            <div key={index} className='added-ingredient'>
+              <button
+                className='button button-block'
+                onClick={() => handleIngredientRemove(ingredient)}
+              >
+                {ingredient.name} - {ingredient.amount} {ingredient.unit}
+              </button>
+            </div>
+          ))}
+        </div>
+        <ol className='added-steps'>
+          {steps.map((step, index) => (
+            <li key={index}>
+              {step}
+              <DeleteIcon
+                sx={{ '& :hover': { cursor: 'pointer' } }}
+                onClick={() => handleStepRemove(step)}
+              />
+            </li>
+          ))}
+        </ol>
+      </div>
     </Wrapper>
   );
 };
