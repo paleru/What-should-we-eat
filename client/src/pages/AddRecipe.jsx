@@ -52,8 +52,8 @@ const AddRecipe = () => {
     setIngredients(updatedIngredients);
   };
 
-  const handleStepRemove = (stepToRemove) => {
-    const updatedSteps = steps.filter((step) => step !== stepToRemove);
+  const handleStepRemove = (indexToRemove) => {
+    const updatedSteps = steps.filter((_, index) => index !== indexToRemove);
     setSteps(updatedSteps);
   };
 
@@ -74,7 +74,7 @@ const AddRecipe = () => {
 
           <FormRowSelect
             labelText='Recipe type'
-            name='recipe type'
+            name='type'
             defaultValue='Select recipe type'
             list={Object.values(RECIPE_TYPE)}
           />
@@ -106,7 +106,7 @@ const AddRecipe = () => {
               {step}
               <DeleteIcon
                 sx={{ '& :hover': { cursor: 'pointer' } }}
-                onClick={() => handleStepRemove(step)}
+                onClick={() => handleStepRemove(index)}
               />
             </li>
           ))}

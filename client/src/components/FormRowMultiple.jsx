@@ -32,7 +32,7 @@ const FormRowMultiple = ({ ingredients, setIngredients, labelText }) => {
           className='form-input form-input-third'
         />
         <input
-          type='text'
+          type='number'
           name='amount'
           value={amount}
           onChange={(e) => setAmount(e.target.value)}
