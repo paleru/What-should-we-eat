@@ -106,7 +106,7 @@ const AddRecipe = () => {
               {step}
               <button
                 type='button'
-                className='close-button'
+                className='clear-button'
                 onClick={() => handleStepRemove(index)}
               >
                 <ClearIcon />
