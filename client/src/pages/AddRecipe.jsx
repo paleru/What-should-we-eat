@@ -11,7 +11,7 @@ import { Form, useNavigation, redirect } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import baseAxiosFetch from '../utils/baseAxiosFetch';
 import { useState } from 'react';
-import DeleteIcon from '@mui/icons-material/Delete';
+import ClearIcon from '@mui/icons-material/Clear';
 
 export const action = async ({ request, ingredients, steps }) => {
   const formData = new FormData(request);
@@ -104,10 +104,13 @@ const AddRecipe = () => {
           {steps.map((step, index) => (
             <li key={index}>
               {step}
-              <DeleteIcon
-                sx={{ '& :hover': { cursor: 'pointer' } }}
+              <button
+                type='button'
+                className='close-button'
                 onClick={() => handleStepRemove(index)}
-              />
+              >
+                <ClearIcon />
+              </button>
             </li>
           ))}
         </ol>

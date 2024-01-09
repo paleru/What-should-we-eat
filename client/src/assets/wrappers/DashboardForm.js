@@ -66,6 +66,12 @@ const Wrapper = styled.section`
     }
   }
 
+  .clear-button {
+    background: transparent;
+    border-color: transparent;
+    cursor: pointer;
+  }
+
   @media (min-width: 800px) {
     .form-center {
       grid-template-columns: 1fr 1fr;
