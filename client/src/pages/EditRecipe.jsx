@@ -1,19 +1,38 @@
 import {
   FormRow,
+  FormRowMultiple,
   FormRowSelect,
   FormRowSteps,
-  FormRowMultiple,
 } from '../components';
 import Wrapper from '../assets/wrappers/DashboardForm';
-import { useOutletContext } from 'react-router-dom';
-import { RECIPE_SORT_BY, RECIPE_TYPE } from '../../../utils/constants';
-import { Form, useNavigation, redirect } from 'react-router-dom';
+import { RECIPE_TYPE } from '../../../utils/constants';
+import {
+  Form,
+  useLoaderData,
+  useNavigation,
+  redirect,
+  useParams,
+} from 'react-router-dom';
 import { toast } from 'react-toastify';
 import baseAxiosFetch from '../utils/baseAxiosFetch';
+import { useOutletContext } from 'react-router-dom';
 import { useState } from 'react';
 import ClearIcon from '@mui/icons-material/Clear';
 
-export const action = async ({ request, ingredients, steps }) => {
+//Loader function to fetch recipe data for editing
+// Loader function to fetch recipe data for editing
+export const loader = async ({ params }) => {
+  try {
+    const { data } = await baseAxiosFetch.get(`/recipes/${params.id}`);
+    return data;
+  } catch (error) {
+    toast.error(error?.response?.data?.msg);
+    return redirect('/dashboard');
+  }
+};
+
+// Action function to handle the form submission for editing
+export const action = async ({ request, params, ingredients, steps }) => {
   const formData = new FormData(request);
   const data = Object.fromEntries(formData);
 
@@ -22,8 +41,8 @@ export const action = async ({ request, ingredients, steps }) => {
   data.steps = steps;
 
   try {
-    await baseAxiosFetch.post('/recipes', data);
-    toast.success('Recipe added successfully');
+    await baseAxiosFetch.patch(`/recipes/${params.id}`, data);
+    toast.success('Recipe updated successfully');
     return redirect('/dashboard');
   } catch (error) {
     toast.error(error?.response?.data?.msg);
@@ -31,20 +50,15 @@ export const action = async ({ request, ingredients, steps }) => {
   }
 };
 
-const AddRecipe = () => {
-  const { user } = useOutletContext();
+const EditRecipe = () => {
+  const { recipe } = useLoaderData();
   const navigation = useNavigation();
   const isSubmitting = navigation.state === 'submitting';
+  const { user } = useOutletContext();
+  const params = useParams(); // Use the useParams hook to get route parameters
 
-  // State for ingredients and steps, which are added submitted with rest of from data
-  const [ingredients, setIngredients] = useState([]);
-  const [steps, setSteps] = useState([]);
-
-  // Call action with ingredients when form is submitted
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    action({ request: event.target, ingredients, steps });
-  };
+  const [ingredients, setIngredients] = useState(recipe.ingredients || []);
+  const [steps, setSteps] = useState(recipe.steps || []);
 
   const handleIngredientRemove = (ingredientToRemove) => {
     const updatedIngredients = ingredients.filter(
@@ -58,14 +72,29 @@ const AddRecipe = () => {
     setSteps(updatedSteps);
   };
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    action({ request: event.target, params, ingredients, steps });
+  };
+
   return (
     <Wrapper>
       <Form method='post' className='form' onSubmit={handleSubmit}>
-        <h4 className='form-title'>Add Recipe</h4>
+        <h4 className='form-title'>Edit Recipe</h4>
         <div className='form-center'>
-          <FormRow type='text' name='title' />
-          <FormRow type='textarea' name='description' />
+          <FormRow
+            type='text'
+            name='title'
+            label='Title'
+            defaultValue={recipe.title}
+          />
+          <FormRow
+            type='textarea'
+            name='description'
+            defaultValue={recipe.description}
+          />
 
+          {/* Use FormRowMultiple and FormRowSteps with pre-filled values */}
           <FormRowMultiple
             ingredients={ingredients}
             setIngredients={setIngredients}
@@ -76,7 +105,7 @@ const AddRecipe = () => {
           <FormRowSelect
             labelText='Recipe type'
             name='type'
-            defaultValue='Select recipe type'
+            defaultValue={recipe.type}
             list={Object.values(RECIPE_TYPE)}
           />
           <button
@@ -88,7 +117,8 @@ const AddRecipe = () => {
           </button>
         </div>
       </Form>
-      {/* display ingredients and steps added by user */}
+
+      {/* Display ingredients and steps added by the user */}
       <div className='user-added'>
         <div className='added-ingredients'>
           {ingredients.map((ingredient, index) => (
@@ -121,4 +151,5 @@ const AddRecipe = () => {
     </Wrapper>
   );
 };
-export default AddRecipe;
+
+export default EditRecipe;

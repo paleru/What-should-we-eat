@@ -1,3 +1,4 @@
+//Component for adding steps to a recipe
 import { useState } from 'react';
 import { useEffect } from 'react';
 

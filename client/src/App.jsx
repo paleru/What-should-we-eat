@@ -10,6 +10,7 @@ import {
   Profile,
   AddRecipe,
   Admin,
+  EditRecipe,
 } from './pages';
 
 //import actions
@@ -17,6 +18,10 @@ import { action as registerAction } from './pages/Register';
 import { action as loginAction } from './pages/Login';
 import { action as addRecipeAction } from './pages/AddRecipe';
 import { loader as dashboardLoader } from './pages/DashboardLayout';
+import { loader as findRecipeLoader } from './pages/FindRecipe';
+import { loader as editRecipeLoader } from './pages/EditRecipe';
+import { action as editRecipeAction } from './pages/EditRecipe';
+import { action as deleteRecipeAction } from './pages/DeleteRecipe';
 
 const router = createBrowserRouter([
   {
@@ -46,6 +51,7 @@ const router = createBrowserRouter([
           {
             index: true,
             element: <FindRecipe />,
+            loader: findRecipeLoader,
           },
           {
             path: 'add-recipe',
@@ -60,6 +66,13 @@ const router = createBrowserRouter([
             path: 'admin',
             element: <Admin />,
           },
+          {
+            path: 'edit-recipe/:id',
+            element: <EditRecipe />,
+            action: editRecipeAction,
+            loader: editRecipeLoader,
+          },
+          { path: 'delete-recipe/:id', action: deleteRecipeAction },
         ],
       },
     ],

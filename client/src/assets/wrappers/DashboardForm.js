@@ -44,6 +44,10 @@ const Wrapper = styled.section`
 
   .added-steps {
     padding: 1rem;
+    line-height: 2;
+    li {
+      padding: 0.5rem;
+    }
   }
 
   .added-ingredients {
@@ -69,7 +73,15 @@ const Wrapper = styled.section`
   .clear-button {
     background: transparent;
     border-color: transparent;
+    display: none;
+    font-size: small;
     cursor: pointer;
+  }
+
+  .added-step:hover {
+    .clear-button {
+      display: inline;
+    }
   }
 
   @media (min-width: 800px) {

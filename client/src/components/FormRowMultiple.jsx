@@ -1,7 +1,13 @@
+//Reusable component for a form row with multiple inputs
 import { useState } from 'react';
 import { useEffect } from 'react';
 
-const FormRowMultiple = ({ ingredients, setIngredients, labelText }) => {
+const FormRowMultiple = ({
+  ingredients,
+  setIngredients,
+  labelText,
+  defaultValue,
+}) => {
   const [name, setName] = useState('');
   const [amount, setAmount] = useState('');
   const [unit, setUnit] = useState('');
@@ -27,6 +33,7 @@ const FormRowMultiple = ({ ingredients, setIngredients, labelText }) => {
           type='text'
           name='ingredient name'
           value={name}
+          defaultValue={defaultValue}
           onChange={(e) => setName(e.target.value)}
           placeholder='Ingredient name'
           className='form-input form-input-third'
@@ -35,6 +42,7 @@ const FormRowMultiple = ({ ingredients, setIngredients, labelText }) => {
           type='number'
           name='amount'
           value={amount}
+          defaultValue={defaultValue}
           onChange={(e) => setAmount(e.target.value)}
           placeholder='Amount'
           className='form-input form-input-third'
@@ -43,6 +51,7 @@ const FormRowMultiple = ({ ingredients, setIngredients, labelText }) => {
           type='text'
           name='unit'
           value={unit}
+          defaultValue={defaultValue}
           onChange={(e) => setUnit(e.target.value)}
           placeholder='Unit'
           className='form-input form-input-third'

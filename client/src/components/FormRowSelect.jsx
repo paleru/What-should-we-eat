@@ -1,3 +1,4 @@
+//Reusable component for form rows with select input
 const FormRowSelect = ({ name, labelText, list, defaultValue = '' }) => {
   return (
     <div className='form-row'>
@@ -10,6 +11,7 @@ const FormRowSelect = ({ name, labelText, list, defaultValue = '' }) => {
         className='form-select'
         defaultValue={defaultValue}
       >
+        {/* select options based on 'RECIPE_TYPE' constant */}
         {list.map((type) => {
           return (
             <option value={type} key={type}>

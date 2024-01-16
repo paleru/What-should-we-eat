@@ -177,6 +177,8 @@ h5 {
   transition: var(--transition);
   display: inline-block;
   border: transparent;
+  text-transform: capitalize;
+  box-shadow: var(--shadow-1);
 }
 .button:hover {
   background: var(--primary-800);

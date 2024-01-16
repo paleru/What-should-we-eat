@@ -1,4 +1,5 @@
-const FormRow = ({ type, name, labelText }) => {
+//reusable component for form rows
+const FormRow = ({ type, name, labelText, defaultValue }) => {
   return (
     <div className='form-row'>
       <label htmlFor='name' className='form-label'>
@@ -8,6 +9,7 @@ const FormRow = ({ type, name, labelText }) => {
         type={type}
         id={name}
         name={name}
+        defaultValue={defaultValue}
         className='form-input'
         required
       />

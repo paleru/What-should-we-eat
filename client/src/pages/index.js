@@ -8,3 +8,4 @@ export { default as FindRecipe } from './FindRecipe';
 export { default as AddRecipe } from './AddRecipe';
 export { default as Profile } from './Profile';
 export { default as Admin } from './Admin';
+export { default as EditRecipe } from './EditRecipe';
