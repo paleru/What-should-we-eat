@@ -3,12 +3,15 @@ import links from '../utils/sidebarItems';
 import { NavLink } from 'react-router-dom';
 
 const SidebarNav = ({ isBig }) => {
-  //toggle if sidebar is open or not
+  //states for sidebar and user role
   const { toggleSidebar, user } = useDashboardContext();
+
   return (
     <div className='nav-links'>
       {links.map((link) => {
         const { text, path, icon } = link;
+        const { role } = user;
+        if (path === 'admin' && role !== 'admin') return;
         return (
           <NavLink
             to={path}

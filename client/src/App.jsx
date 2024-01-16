@@ -22,6 +22,7 @@ import { loader as findRecipeLoader } from './pages/FindRecipe';
 import { loader as editRecipeLoader } from './pages/EditRecipe';
 import { action as editRecipeAction } from './pages/EditRecipe';
 import { action as deleteRecipeAction } from './pages/DeleteRecipe';
+import { loader as adminLoader } from './pages/Admin';
 
 const router = createBrowserRouter([
   {
@@ -65,6 +66,7 @@ const router = createBrowserRouter([
           {
             path: 'admin',
             element: <Admin />,
+            loader: adminLoader,
           },
           {
             path: 'edit-recipe/:id',

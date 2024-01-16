@@ -10,3 +10,4 @@ export { default as FormRowMultiple } from './FormRowMultiple';
 export { default as FormRowSteps } from './FormRowSteps';
 export { default as RecipesContainer } from './RecipesContainer';
 export { default as SearchContainer } from './SearchContainer';
+export { default as StatItem } from './StatItem';
