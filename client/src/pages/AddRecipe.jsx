@@ -63,8 +63,18 @@ const AddRecipe = () => {
       <Form method='post' className='form' onSubmit={handleSubmit}>
         <h4 className='form-title'>Add Recipe</h4>
         <div className='form-center'>
-          <FormRow type='text' name='title' />
-          <FormRow type='textarea' name='description' />
+          <FormRow type='text' name='title' className='form-row' />
+          <FormRowSelect
+            labelText='Recipe type'
+            name='type'
+            defaultValue='Select recipe type'
+            list={Object.values(RECIPE_TYPE)}
+          />
+          <FormRow
+            name='description'
+            maxLength='100'
+            className='form-row-double'
+          />
 
           <FormRowMultiple
             ingredients={ingredients}
@@ -73,12 +83,6 @@ const AddRecipe = () => {
 
           <FormRowSteps steps={steps} setSteps={setSteps} labelText='Steps' />
 
-          <FormRowSelect
-            labelText='Recipe type'
-            name='type'
-            defaultValue='Select recipe type'
-            list={Object.values(RECIPE_TYPE)}
-          />
           <button
             type='submit'
             className='button button-block form-button'

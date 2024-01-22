@@ -26,8 +26,8 @@ const Login = () => {
     <Wrapper>
       <Form className='form' method='post'>
         <h4>login</h4>
-        <FormRow type='email' name='email' />
-        <FormRow type='password' name='password' />
+        <FormRow type='email' name='email' className='form-row' />
+        <FormRow type='password' name='password' className='form-row' />
         <button
           type='submit'
           className='button button-block'

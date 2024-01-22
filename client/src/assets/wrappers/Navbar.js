@@ -20,7 +20,9 @@ const Wrapper = styled.nav`
     cursor: pointer;
     display: flex;
     align-items: center;
-    font-size: 1.75rem;
+    svg {
+      font-size: 2rem;
+    }
   }
 
   .button-container {

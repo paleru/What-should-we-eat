@@ -89,6 +89,10 @@ const Wrapper = styled.section`
       grid-template-columns: 1fr 1fr;
       align-items: center;
       column-gap: 1rem;
+      .form-button,
+      .form-row-double {
+        grid-column: span 2; /* Make the textarea and button span two columns */
+      }
     }
   }
   @media (min-width: 1300px) {

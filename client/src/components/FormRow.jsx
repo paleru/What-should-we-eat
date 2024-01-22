@@ -1,7 +1,7 @@
 //reusable component for form rows
-const FormRow = ({ type, name, labelText, defaultValue }) => {
+const FormRow = ({ type, name, labelText, defaultValue, className }) => {
   return (
-    <div className='form-row'>
+    <div className={className}>
       <label htmlFor='name' className='form-label'>
         {labelText || name}
       </label>
@@ -11,6 +11,7 @@ const FormRow = ({ type, name, labelText, defaultValue }) => {
         name={name}
         defaultValue={defaultValue}
         className='form-input'
+        maxLength={name === 'description' ? '190' : ''}
         required
       />
     </div>

@@ -6,6 +6,7 @@ import { StatItem } from '../components';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import LocalDiningIcon from '@mui/icons-material/LocalDining';
 
+//prevent ordinary users from accessing this page
 export const loader = async () => {
   try {
     const response = await baseAxiosFetch.get('/users/admin/statistics');
@@ -20,6 +21,7 @@ const Admin = () => {
   const { users, recipes } = useLoaderData();
 
   return (
+    //number of users and recipes in db
     <Wrapper>
       <StatItem title='current users' count={users} icon={<PeopleAltIcon />} />
       <StatItem

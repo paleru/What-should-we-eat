@@ -11,7 +11,7 @@ const Navbar = () => {
     <Wrapper>
       <div className='nav-center'>
         <button type='button' className='toggle-button' onClick={toggleSidebar}>
-          <MenuIcon fontSize='large' className='menu-icon' />
+          <MenuIcon className='menu-icon' />
         </button>
         <div>
           <h4>What should we eat?</h4>

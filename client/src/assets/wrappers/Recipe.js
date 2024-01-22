@@ -27,7 +27,7 @@ const Wrapper = styled.article`
   }
   .info {
     h5 {
-      margin-bottom: 0.5;
+      margin-bottom: 0.5rem;
     }
     p {
       margin: 0;

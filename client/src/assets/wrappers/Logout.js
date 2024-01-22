@@ -23,7 +23,7 @@ const Wrapper = styled.div`
     text-align: center;
     visibility: hidden;
     border-radius: var(--border-radius);
-    background: var(--primary-600);
+    background: #b23b3b;
   }
   .show-dropdown {
     visibility: visible;
@@ -41,7 +41,7 @@ const Wrapper = styled.div`
     height: 100%;
   }
   .dropdown-button:hover {
-    background: var(--primary-800);
+    background: #6b1d1d;
   }
 `;
 

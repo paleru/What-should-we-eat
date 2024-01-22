@@ -20,7 +20,6 @@ import { useState } from 'react';
 import ClearIcon from '@mui/icons-material/Clear';
 
 //Loader function to fetch recipe data for editing
-// Loader function to fetch recipe data for editing
 export const loader = async ({ params }) => {
   try {
     const { data } = await baseAxiosFetch.get(`/recipes/${params.id}`);
@@ -86,11 +85,22 @@ const EditRecipe = () => {
             type='text'
             name='title'
             label='Title'
+            className='form-row'
             defaultValue={recipe.title}
           />
+
+          <FormRowSelect
+            labelText='Recipe type'
+            name='type'
+            defaultValue={recipe.type}
+            list={Object.values(RECIPE_TYPE)}
+          />
+
           <FormRow
-            type='textarea'
             name='description'
+            label='Description'
+            className='form-row-double'
+            maxLength='100'
             defaultValue={recipe.description}
           />
 
@@ -102,12 +112,6 @@ const EditRecipe = () => {
 
           <FormRowSteps steps={steps} setSteps={setSteps} labelText='Steps' />
 
-          <FormRowSelect
-            labelText='Recipe type'
-            name='type'
-            defaultValue={recipe.type}
-            list={Object.values(RECIPE_TYPE)}
-          />
           <button
             type='submit'
             className='button button-block form-button'

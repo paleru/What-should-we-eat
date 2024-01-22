@@ -29,10 +29,20 @@ const Register = () => {
     <Wrapper>
       <Form method='post' className='form'>
         <h4>Register</h4>
-        <FormRow type='text' name='name' labelText='first name' />
-        <FormRow type='text' name='lastName' labelText='last name' />
-        <FormRow type='email' name='email' />
-        <FormRow type='password' name='password' />
+        <FormRow
+          type='text'
+          name='name'
+          labelText='first name'
+          className='form-row'
+        />
+        <FormRow
+          type='text'
+          name='lastName'
+          labelText='last name'
+          className='form-row'
+        />
+        <FormRow type='email' name='email' className='form-row' />
+        <FormRow type='password' name='password' className='form-row' />
         <button
           type='submit'
           className='button button-block'
