@@ -16,6 +16,8 @@ import {
   validateRecipeOwnership,
 } from '../middleware/validationMiddleware.js';
 
+import upload from '../middleware/multerMiddleware.js';
+
 //routes with validation middleware
 recipeRouter.get('/', getRecipes);
 recipeRouter.get('/own', getOwnRecipes);

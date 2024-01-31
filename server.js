@@ -16,6 +16,14 @@ import authRouter from './routes/authRouter.js';
 import errorHandlerMiddleware from './middleware/errorHandlerMiddleware.js';
 import { authMiddleware } from './middleware/authMiddleware.js';
 
+//public
+import path from 'path';
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+app.use(express.static(path.resolve(__dirname, './public')));
+
 app.use(cookieParser());
 app.use(express.json());
 

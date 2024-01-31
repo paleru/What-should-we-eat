@@ -60,7 +60,12 @@ const AddRecipe = () => {
 
   return (
     <Wrapper>
-      <Form method='post' className='form' onSubmit={handleSubmit}>
+      <Form
+        method='post'
+        className='form'
+        encType='multipart/form-data'
+        onSubmit={handleSubmit}
+      >
         <h4 className='form-title'>Add Recipe</h4>
         <div className='form-center'>
           <FormRow type='text' name='title' className='form-row' />
@@ -70,11 +75,20 @@ const AddRecipe = () => {
             defaultValue='Select recipe type'
             list={Object.values(RECIPE_TYPE)}
           />
-          <FormRow
-            name='description'
-            maxLength='100'
-            className='form-row-double'
-          />
+          <FormRow name='description' maxLength='100' className='form-row' />
+
+          <div className='form-row'>
+            <label htmlFor='image' className='form-label'>
+              Upload an image (max 0.5 MB)
+            </label>
+            <input
+              type='file'
+              name='image'
+              id='image'
+              className='form-input'
+              accept='image/*'
+            />
+          </div>
 
           <FormRowMultiple
             ingredients={ingredients}

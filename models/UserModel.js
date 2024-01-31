@@ -19,6 +19,11 @@ const UserSchema = new mongoose.Schema({
     enum: ['user', 'admin'],
     default: 'user',
   },
+  avatar: {
+    type: String,
+    avatarPublicId: String,
+    default: 'no-avatar.png',
+  },
 });
 
 //removes password from user object when getting current user

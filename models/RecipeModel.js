@@ -30,6 +30,11 @@ const recipeSchema = new mongoose.Schema(
       type: mongoose.Types.ObjectId,
       ref: 'User',
     },
+    image: {
+      type: String,
+      imagePublicId: String,
+      default: 'no-image.png',
+    },
   },
   { timestamps: true }
 );

@@ -69,6 +69,7 @@ export const addRecipe = async (req, res) => {
   req.body.createdBy = req.user.userId;
   const recipe = await RecipeModel.create(req.body);
   res.status(StatusCodes.CREATED).json({ recipe });
+  console.log(req.file);
 };
 
 /* export const addRecipe = async (req, res) => {

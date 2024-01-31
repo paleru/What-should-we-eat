@@ -23,6 +23,7 @@ import { loader as editRecipeLoader } from './pages/EditRecipe';
 import { action as editRecipeAction } from './pages/EditRecipe';
 import { action as deleteRecipeAction } from './pages/DeleteRecipe';
 import { loader as adminLoader } from './pages/Admin';
+import { action as profileAction } from './pages/Profile';
 
 const router = createBrowserRouter([
   {
@@ -62,6 +63,7 @@ const router = createBrowserRouter([
           {
             path: 'profile',
             element: <Profile />,
+            action: profileAction,
           },
           {
             path: 'admin',

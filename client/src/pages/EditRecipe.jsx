@@ -99,10 +99,23 @@ const EditRecipe = () => {
           <FormRow
             name='description'
             label='Description'
-            className='form-row-double'
+            className='form-row'
             maxLength='100'
             defaultValue={recipe.description}
           />
+
+          <div className='form-row'>
+            <label htmlFor='image' className='form-label'>
+              Upload an image (max 0.5 MB)
+            </label>
+            <input
+              type='file'
+              name='avatar'
+              id='avatar'
+              className='form-input'
+              accept='image/*'
+            />
+          </div>
 
           {/* Use FormRowMultiple and FormRowSteps with pre-filled values */}
           <FormRowMultiple
