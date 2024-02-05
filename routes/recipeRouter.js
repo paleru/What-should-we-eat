@@ -23,7 +23,7 @@ recipeRouter.get('/', getRecipes);
 recipeRouter.get('/own', getOwnRecipes);
 recipeRouter.get('/by-ingredients', getRecipesByIngredients);
 recipeRouter.get('/:id', validateRecipeId, getRecipeById);
-recipeRouter.post('/', validateRecipeInput, addRecipe);
+recipeRouter.post('/', upload.single('image'), validateRecipeInput, addRecipe);
 recipeRouter.patch(
   '/:id',
   validateRecipeInput,

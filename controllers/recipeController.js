@@ -66,10 +66,21 @@ export const deleteRecipeById = async (req, res) => {
 };
 
 export const addRecipe = async (req, res) => {
-  req.body.createdBy = req.user.userId;
-  const recipe = await RecipeModel.create(req.body);
+  const { title, type, description } = req.body;
+  const createdBy = req.user.userId;
+
+  // Assuming 'image' is the name of the field for the image in the form
+  const imagePath = req.file ? req.file.path : null;
+
+  const recipe = await RecipeModel.create({
+    title,
+    type,
+    description,
+    image: imagePath, // Update 'image' field with file path
+    createdBy,
+  });
+
   res.status(StatusCodes.CREATED).json({ recipe });
-  console.log(req.file);
 };
 
 /* export const addRecipe = async (req, res) => {
