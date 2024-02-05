@@ -39,8 +39,8 @@ const Profile = () => {
             </label>
             <input
               type='file'
-              name='avatar'
               id='avatar'
+              name='avatar'
               className='form-input'
               accept='image/*'
             />

@@ -22,7 +22,6 @@ const UserSchema = new mongoose.Schema({
   avatar: {
     type: String,
     avatarPublicId: String,
-    default: 'no-avatar.png',
   },
 });
 

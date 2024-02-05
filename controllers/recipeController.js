@@ -69,14 +69,13 @@ export const addRecipe = async (req, res) => {
   const { title, type, description } = req.body;
   const createdBy = req.user.userId;
 
-  // Assuming 'image' is the name of the field for the image in the form
   const imagePath = req.file ? req.file.path : null;
 
   const recipe = await RecipeModel.create({
     title,
     type,
     description,
-    image: imagePath, // Update 'image' field with file path
+    image: imagePath,
     createdBy,
   });
 
