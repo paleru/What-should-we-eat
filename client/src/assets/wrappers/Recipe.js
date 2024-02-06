@@ -52,9 +52,10 @@ const Wrapper = styled.article`
   }
   .recipe-img {
     width: 100%;
-    height: 300px;
+    height: 100%;
     object-fit: cover;
     border-radius: var(--border-radius);
+    grid-column: span 2;
   }
   .user-img {
     width: 25px;

@@ -6,6 +6,7 @@ import advancedFormat from 'dayjs/plugin/advancedFormat';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import PersonIcon from '@mui/icons-material/Person';
 import LocalDiningIcon from '@mui/icons-material/LocalDining';
+import main from '../assets/images/photo.svg';
 
 day.extend(advancedFormat);
 
@@ -28,15 +29,16 @@ const Recipe = ({
       <header>
         <div className='info'>
           <h5>{title}</h5>
-          {image ? (
-            <img src={image} alt='image' className='recipe-img' />
-          ) : (
-            <p>{description}</p>
-          )}
+          <p>{description}</p>
         </div>
       </header>
       <div className='content'>
         <div className='content-center'>
+          {image ? (
+            <img src={image} alt='image' className='recipe-img' />
+          ) : (
+            <img src={main} alt='no photo' className='recipe-img' />
+          )}
           <RecipeInfo icon={<LocalDiningIcon fontSize='small' />} text={type} />
           <RecipeInfo
             icon={<CalendarMonthIcon fontSize='small' />}
