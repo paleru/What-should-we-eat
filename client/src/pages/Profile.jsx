@@ -15,6 +15,7 @@ export const action = async ({ request }) => {
   }
   try {
     await baseAxiosFetch.patch('/users/update-user', formData);
+    console.log(formData);
     toast.success('Profile updated successfully');
   } catch (error) {
     toast.error(error?.response?.data?.msg);

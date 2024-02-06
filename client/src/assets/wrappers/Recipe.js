@@ -50,6 +50,17 @@ const Wrapper = styled.article`
       grid-template-columns: 1fr 1fr;
     }
   }
+  .recipe-img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: var(--border-radius);
+  }
+  .user-img {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+  }
   .actions {
     display: flex;
     margin-top: 1rem;
@@ -63,6 +74,13 @@ const Wrapper = styled.article`
     align-items: center;
     margin-right: 0.5rem;
     padding: 0.25rem 0.5rem;
+  }
+  /* enables avatar to be positioned right */
+  .filler {
+    flex-grow: 1;
+  }
+  .user-box {
+    justify-self: end;
   }
 `;
 

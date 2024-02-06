@@ -26,6 +26,7 @@ recipeRouter.get('/:id', validateRecipeId, getRecipeById);
 recipeRouter.post('/', upload.single('image'), validateRecipeInput, addRecipe);
 recipeRouter.patch(
   '/:id',
+  upload.single('image'),
   validateRecipeInput,
   validateRecipeId,
   validateRecipeOwnership,

@@ -19,6 +19,7 @@ const Recipe = ({
   createdBy,
   createdAt,
   updatedAt,
+  image,
 }) => {
   const createdDate = day(createdAt).format('Do MMMM YYYY');
   //const updatedDate = day(updatedAt).format('Do MMMM YYYY');
@@ -27,7 +28,11 @@ const Recipe = ({
       <header>
         <div className='info'>
           <h5>{title}</h5>
-          <p>{description}</p>
+          {image ? (
+            <img src={image} alt='image' className='recipe-img' />
+          ) : (
+            <p>{description}</p>
+          )}
         </div>
       </header>
       <div className='content'>
@@ -37,7 +42,7 @@ const Recipe = ({
             icon={<CalendarMonthIcon fontSize='small' />}
             text={createdDate}
           />
-          <RecipeInfo icon={<PersonIcon fontSize='small' />} text={createdBy} />
+
           {/* <div className={`updated: ${updatedDate}`}>{updatedDate}</div>
                     <ul className='listed-ingredients'>
             {ingredients.map((ingredient, index) => (
@@ -66,6 +71,13 @@ const Recipe = ({
               Delete
             </button>
           </Form>
+          <div className='filler'></div>
+          <div className='user-box'>
+            <RecipeInfo
+              icon={<PersonIcon fontSize='small' />}
+              text={createdBy}
+            />
+          </div>
         </footer>
       </div>
     </Wrapper>

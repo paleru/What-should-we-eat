@@ -1,5 +1,7 @@
 import RecipeModel from '../models/RecipeModel.js';
 import { StatusCodes } from 'http-status-codes';
+import { v2 as cloudinary } from 'cloudinary';
+import { promises as fs } from 'fs';
 
 //get all recipes
 export const getRecipes = async (req, res) => {
@@ -46,14 +48,35 @@ export const getRecipeById = async (req, res) => {
 
 export const editRecipeById = async (req, res) => {
   const { id } = req.params;
+  const obj = { ...req.body };
+  console.log(obj.ingredients, obj.steps);
 
-  const updatedRecipe = await RecipeModel.findByIdAndUpdate(id, req.body, {
-    new: true,
-  });
+  // Check if ingredients need to be parsed
+  if (obj.ingredients && typeof obj.ingredients === 'string') {
+    obj.ingredients = JSON.parse(obj.ingredients);
+  }
 
-  res
-    .status(StatusCodes.OK)
-    .json({ msg: 'recipe updated', recipe: updatedRecipe });
+  // Check if steps need to be parsed
+  if (obj.steps && typeof obj.steps === 'string') {
+    obj.steps = obj.steps.split(','); // Split the steps string into an array
+  }
+
+  if (req.file) {
+    // Upload image to cloudinary
+    const response = await cloudinary.uploader.upload(req.file.path);
+    await fs.unlink(req.file.path);
+    obj.image = response.secure_url;
+    obj.imagePublicId = response.public_id;
+  }
+
+  // Update the recipe
+  const updatedRecipe = await RecipeModel.findByIdAndUpdate(id, obj);
+
+  // Delete old image from cloudinary if a new image was uploaded
+  if (req.file && updatedRecipe.imagePublicId) {
+    await cloudinary.uploader.destroy(updatedRecipe.imagePublicId);
+  }
+  res.status(StatusCodes.OK).json({ msg: 'recipe updated' });
 };
 
 export const deleteRecipeById = async (req, res) => {
@@ -66,19 +89,8 @@ export const deleteRecipeById = async (req, res) => {
 };
 
 export const addRecipe = async (req, res) => {
-  const { title, type, description } = req.body;
-  const createdBy = req.user.userId;
-
-  const imagePath = req.file ? req.file.path : null;
-
-  const recipe = await RecipeModel.create({
-    title,
-    type,
-    description,
-    image: imagePath,
-    createdBy,
-  });
-
+  req.body.createdBy = req.user.userId;
+  const recipe = await RecipeModel.create(req.body);
   res.status(StatusCodes.CREATED).json({ recipe });
 };
 

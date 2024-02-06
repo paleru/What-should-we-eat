@@ -33,14 +33,13 @@ export const loader = async ({ params }) => {
 // Action function to handle the form submission for editing
 export const action = async ({ request, params, ingredients, steps }) => {
   const formData = new FormData(request);
-  const data = Object.fromEntries(formData);
-
-  // Add ingredients and steps to data
-  data.ingredients = ingredients;
-  data.steps = steps;
+  formData.append('ingredients', JSON.stringify(ingredients)); // Add ingredients to formData
+  formData.append('steps', steps); // Add steps to formData
 
   try {
-    await baseAxiosFetch.patch(`/recipes/${params.id}`, data);
+    await baseAxiosFetch.patch(`/recipes/${params.id}`, formData, {
+      headers: { 'Content-Type': 'multipart/form-data' }, // Ensure correct content type for file upload
+    });
     toast.success('Recipe updated successfully');
     return redirect('/dashboard');
   } catch (error) {
@@ -110,8 +109,8 @@ const EditRecipe = () => {
             </label>
             <input
               type='file'
-              name='avatar'
-              id='avatar'
+              name='image'
+              id='image'
               className='form-input'
               accept='image/*'
             />

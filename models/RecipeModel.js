@@ -31,9 +31,8 @@ const recipeSchema = new mongoose.Schema(
       ref: 'User',
     },
     image: {
-      type: String,
+      image: String,
       imagePublicId: String,
-      default: 'no-image.png',
     },
   },
   { timestamps: true }
