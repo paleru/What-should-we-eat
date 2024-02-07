@@ -52,7 +52,7 @@ const Wrapper = styled.article`
   }
   .recipe-img {
     width: 100%;
-    height: 100%;
+    height: 300px;
     object-fit: cover;
     border-radius: var(--border-radius);
     grid-column: span 2;

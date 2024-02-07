@@ -20,7 +20,7 @@ const Wrapper = styled.section`
       gap: 2rem;
     }
   }
-  @media (min-width: 1300px) {
+  @media (min-width: 1400px) {
     .recipes {
       grid-template-columns: 1fr 1fr 1fr;
       gap: 2rem;

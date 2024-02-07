@@ -8,9 +8,9 @@ import Wrapper from '../assets/wrappers/DashboardForm';
 import { RECIPE_TYPE } from '../../../utils/constants';
 import {
   Form,
+  redirect,
   useLoaderData,
   useNavigation,
-  redirect,
   useParams,
 } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -30,15 +30,16 @@ export const loader = async ({ params }) => {
   }
 };
 
-// Action function to handle the form submission for editing
+//Action function to handle the form submission for editing
 export const action = async ({ request, params, ingredients, steps }) => {
   const formData = new FormData(request);
-  formData.append('ingredients', JSON.stringify(ingredients)); // Add ingredients to formData
-  formData.append('steps', steps); // Add steps to formData
+  //Add ingredients and steps to formData
+  formData.append('ingredients', JSON.stringify(ingredients));
+  formData.append('steps', steps);
 
   try {
     await baseAxiosFetch.patch(`/recipes/${params.id}`, formData, {
-      headers: { 'Content-Type': 'multipart/form-data' }, // Ensure correct content type for file upload
+      headers: { 'Content-Type': 'multipart/form-data' },
     });
     toast.success('Recipe updated successfully');
     return redirect('/dashboard');
