@@ -90,14 +90,13 @@ const AddRecipe = () => {
             />
           </div>
 
-          <SubmitButton formButton />
-
           <FormRowMultiple
             ingredients={ingredients}
             setIngredients={setIngredients}
           />
 
           <FormRowSteps steps={steps} setSteps={setSteps} labelText='Steps' />
+          <SubmitButton formButton />
         </div>
       </Form>
       {/* display ingredients and steps added by user */}
