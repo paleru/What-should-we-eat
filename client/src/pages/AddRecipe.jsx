@@ -3,11 +3,12 @@ import {
   FormRowSelect,
   FormRowSteps,
   FormRowMultiple,
+  SubmitButton,
 } from '../components';
 import Wrapper from '../assets/wrappers/DashboardForm';
 import { useOutletContext } from 'react-router-dom';
 import { RECIPE_SORT_BY, RECIPE_TYPE } from '../../../utils/constants';
-import { Form, useNavigation, redirect } from 'react-router-dom';
+import { Form, redirect } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import baseAxiosFetch from '../utils/baseAxiosFetch';
 import { useState } from 'react';
@@ -32,9 +33,8 @@ export const action = async ({ request, ingredients, steps }) => {
 };
 
 const AddRecipe = () => {
+  //TODO use to add recipe with name and profile pic of user
   const { user } = useOutletContext();
-  const navigation = useNavigation();
-  const isSubmitting = navigation.state === 'submitting';
 
   // State for ingredients and steps, which are added submitted with rest of from data
   const [ingredients, setIngredients] = useState([]);
@@ -90,20 +90,14 @@ const AddRecipe = () => {
             />
           </div>
 
+          <SubmitButton formButton />
+
           <FormRowMultiple
             ingredients={ingredients}
             setIngredients={setIngredients}
           />
 
           <FormRowSteps steps={steps} setSteps={setSteps} labelText='Steps' />
-
-          <button
-            type='submit'
-            className='button button-block form-button'
-            disabled={isSubmitting}
-          >
-            {isSubmitting ? 'Submitting...' : 'Submit'}
-          </button>
         </div>
       </Form>
       {/* display ingredients and steps added by user */}

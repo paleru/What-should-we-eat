@@ -3,16 +3,11 @@ import {
   FormRowMultiple,
   FormRowSelect,
   FormRowSteps,
+  SubmitButton,
 } from '../components';
 import Wrapper from '../assets/wrappers/DashboardForm';
 import { RECIPE_TYPE } from '../../../utils/constants';
-import {
-  Form,
-  redirect,
-  useLoaderData,
-  useNavigation,
-  useParams,
-} from 'react-router-dom';
+import { Form, redirect, useLoaderData, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import baseAxiosFetch from '../utils/baseAxiosFetch';
 import { useOutletContext } from 'react-router-dom';
@@ -51,8 +46,7 @@ export const action = async ({ request, params, ingredients, steps }) => {
 
 const EditRecipe = () => {
   const { recipe } = useLoaderData();
-  const navigation = useNavigation();
-  const isSubmitting = navigation.state === 'submitting';
+  //TODO use to edit recipe to new profile pic of user who added/edited recipe
   const { user } = useOutletContext();
   const params = useParams(); // Use the useParams hook to get route parameters
 
@@ -125,13 +119,7 @@ const EditRecipe = () => {
 
           <FormRowSteps steps={steps} setSteps={setSteps} labelText='Steps' />
 
-          <button
-            type='submit'
-            className='button button-block form-button'
-            disabled={isSubmitting}
-          >
-            {isSubmitting ? 'Submitting...' : 'Submit'}
-          </button>
+          <SubmitButton formButton />
         </div>
       </Form>
 

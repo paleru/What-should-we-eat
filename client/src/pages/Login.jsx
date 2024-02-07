@@ -1,6 +1,6 @@
-import { Link, Form, redirect, useNavigation } from 'react-router-dom';
+import { Link, Form, redirect } from 'react-router-dom';
 import Wrapper from '../assets/wrappers/RegisterAndLoginPage';
-import { FormRow } from '../components';
+import { FormRow, SubmitButton } from '../components';
 import baseAxiosFetch from '../utils/baseAxiosFetch';
 import { toast } from 'react-toastify';
 
@@ -19,22 +19,13 @@ export const action = async ({ request }) => {
 };
 
 const Login = () => {
-  const navigation = useNavigation();
-  const submitting = navigation.state.submitting;
-
   return (
     <Wrapper>
       <Form className='form' method='post'>
         <h4>login</h4>
         <FormRow type='email' name='email' className='form-row' />
         <FormRow type='password' name='password' className='form-row' />
-        <button
-          type='submit'
-          className='button button-block'
-          disabled={submitting}
-        >
-          {submitting ? 'Submitting...' : 'Submit'}
-        </button>
+        <SubmitButton />
         {/*         <button type='button' className='button button-block'>
           Use as guest
         </button> */}
