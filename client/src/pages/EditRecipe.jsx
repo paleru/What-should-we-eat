@@ -73,6 +73,12 @@ const EditRecipe = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    if (ingredients.length === 0 || steps.length === 0) {
+      toast.error('Please add at least one ingredient and one step.');
+      return;
+    }
+
     action({ request: event.target, params, ingredients, steps });
   };
 

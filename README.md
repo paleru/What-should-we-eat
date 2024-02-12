@@ -13,6 +13,6 @@ TODO:
 [X] File size restrictions when editing recipe image
 [X] Pressing 'enter' while adding steps or ingredients when adding/editing recipe should not submit full recipe.
 [] Get redirect when adding/editing recipe working again.
-[] Steps/ingredients should not be allowed to be empty when adding recipes
+[X] Steps/ingredients should not be allowed to be empty when adding recipes
 [] Undo capitalizing units
 [] Ingredients should not require both amount and unit
