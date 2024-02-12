@@ -31,7 +31,13 @@ export const action = async ({ request, params, ingredients, steps }) => {
   //Add ingredients and steps to formData
   formData.append('ingredients', JSON.stringify(ingredients));
   formData.append('steps', steps);
+  const file = formData.get('image');
 
+  // Check if file size is less than 0.5 MB
+  if (file && file.size > 500000) {
+    toast.error('File size must be less than 0.5 MB');
+    return null;
+  }
   try {
     await baseAxiosFetch.patch(`/recipes/${params.id}`, formData, {
       headers: { 'Content-Type': 'multipart/form-data' },
