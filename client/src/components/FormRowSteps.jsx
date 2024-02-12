@@ -14,6 +14,13 @@ const FormRowSteps = ({ steps, setSteps, labelText }) => {
     console.log(steps);
   }, [steps]);
 
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      event.preventDefault(); // Prevent form submission
+      addStep(); // Add the step instead
+    }
+  };
+
   return (
     <div className='form-row'>
       <label htmlFor='name' className='form-label'>
@@ -25,6 +32,7 @@ const FormRowSteps = ({ steps, setSteps, labelText }) => {
         value={step}
         onChange={(e) => setStep(e.target.value)}
         className='form-input'
+        onKeyDown={handleKeyPress} //Add step when pressing enter
       />
       <button
         type='button'

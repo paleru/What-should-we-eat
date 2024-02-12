@@ -19,6 +19,14 @@ const FormRowMultiple = ({
     setUnit('');
   };
 
+  //prevent form submission when pressing enter
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      event.preventDefault(); // Prevent form submission
+      addIngredient(); // Add the ingredient instead
+    }
+  };
+
   useEffect(() => {
     console.log(ingredients);
   }, [ingredients]);
@@ -37,6 +45,7 @@ const FormRowMultiple = ({
           onChange={(e) => setName(e.target.value)}
           placeholder='Ingredient name'
           className='form-input form-input-third'
+          onKeyDown={handleKeyPress} //Add ingredient when pressing enter
         />
         <input
           type='number'
@@ -46,6 +55,7 @@ const FormRowMultiple = ({
           onChange={(e) => setAmount(e.target.value)}
           placeholder='Amount'
           className='form-input form-input-third'
+          onKeyDown={handleKeyPress}
         />
         <input
           type='text'
@@ -55,6 +65,7 @@ const FormRowMultiple = ({
           onChange={(e) => setUnit(e.target.value)}
           placeholder='Unit'
           className='form-input form-input-third'
+          onKeyDown={handleKeyPress}
         />
       </div>
       <button
