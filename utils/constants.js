@@ -6,8 +6,8 @@ export const RECIPE_TYPE = {
 };
 
 export const RECIPE_SORT_BY = {
-  NEWEST_FIRST: 'newestFirst',
-  OLDEST_FIRST: 'oldestFirst',
-  ASCENDING: 'ascending',
-  DESCENDING: 'descending',
+  NEWEST_FIRST: 'newest',
+  OLDEST_FIRST: 'oldest',
+  ASCENDING: 'asc',
+  DESCENDING: 'desc',
 };
