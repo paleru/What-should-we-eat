@@ -11,7 +11,7 @@ export const action = async ({ request }) => {
   try {
     await baseAxiosFetch.post('/auth/login', data);
     toast.success('Logged in successfully');
-    return redirect('/dashboard');
+    return redirect('/dashboard/recipes');
   } catch (error) {
     toast.error(error?.response?.data?.msg);
     return error;
@@ -29,7 +29,7 @@ const Login = () => {
     try {
       await baseAxiosFetch.post('/auth/login', data);
       toast.success('Test the appllication as a guest user');
-      navigate('/dashboard');
+      navigate('/dashboard/recipes');
     } catch (error) {
       toast.error(error?.response?.data?.msg);
     }

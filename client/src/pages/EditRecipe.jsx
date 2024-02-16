@@ -21,7 +21,7 @@ export const loader = async ({ params }) => {
     return data;
   } catch (error) {
     toast.error(error?.response?.data?.msg);
-    return redirect('/dashboard');
+    return redirect('/dashboard/recipes');
   }
 };
 
@@ -43,7 +43,7 @@ export const action = async ({ request, params, ingredients, steps }) => {
       headers: { 'Content-Type': 'multipart/form-data' },
     });
     toast.success('Recipe updated successfully');
-    return redirect('/dashboard');
+    return redirect('/dashboard/recipes');
   } catch (error) {
     toast.error(error?.response?.data?.msg);
     return error;

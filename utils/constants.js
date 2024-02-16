@@ -8,6 +8,6 @@ export const RECIPE_TYPE = {
 export const RECIPE_SORT_BY = {
   NEWEST_FIRST: 'newest',
   OLDEST_FIRST: 'oldest',
-  ASCENDING: 'asc',
-  DESCENDING: 'desc',
+  ASCENDING: 'a-z',
+  DESCENDING: 'z-a',
 };

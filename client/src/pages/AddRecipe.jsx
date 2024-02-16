@@ -25,7 +25,7 @@ export const action = async ({ request, ingredients, steps }) => {
   try {
     await baseAxiosFetch.post('/recipes', data);
     toast.success('Recipe added successfully');
-    return redirect('/dashboard');
+    return redirect('/dashboard/recipes');
   } catch (error) {
     toast.error(error?.response?.data?.msg);
     return error;

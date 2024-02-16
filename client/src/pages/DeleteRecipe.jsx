@@ -9,5 +9,5 @@ export const action = async ({ params }) => {
   } catch (error) {
     toast.error(error?.response?.data?.msg);
   }
-  return redirect('/dashboard');
+  return redirect('/dashboard/recipes');
 };

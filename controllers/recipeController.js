@@ -29,8 +29,8 @@ export const getRecipes = async (req, res) => {
   const sortOptions = {
     newest: 'createdAt',
     oldest: '-createdAt',
-    asc: 'title',
-    desc: '-title',
+    'a-z': 'title',
+    'z-a': '-title',
   };
 
   //sort by newest by default, or by user choice

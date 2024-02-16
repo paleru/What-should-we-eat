@@ -13,7 +13,7 @@ export const loader = async () => {
     return response.data;
   } catch (error) {
     toast.error('You are not authorized to view this page');
-    return redirect('/dashboard');
+    return redirect('/dashboard/recipes');
   }
 };
 
