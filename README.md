@@ -16,3 +16,4 @@ TODO:
 [X] Steps/ingredients should not be allowed to be empty when adding recipes
 [] Undo capitalizing units
 [] Ingredients should not require both amount and unit
+[] 'What to cook?' page based on available ingredients

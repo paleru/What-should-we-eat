@@ -13,7 +13,7 @@ export const loader = async ({ request }) => {
   console.log(params);
   try {
     const { data } = await baseAxiosFetch.get('/recipes/', { params });
-    return { data };
+    return { data, searchParams: { ...params } };
   } catch (error) {
     toast.error(error?.response?.data?.message);
     return error;
@@ -23,9 +23,10 @@ export const loader = async ({ request }) => {
 const FindRecipeContext = createContext();
 
 const FindRecipe = () => {
-  const { data } = useLoaderData();
+  const { data, searchParams } = useLoaderData();
   return (
-    <FindRecipeContext.Provider value={{ data }}>
+    //pass data and searchParams to context
+    <FindRecipeContext.Provider value={{ data, searchParams }}>
       <SearchContainer />
       <RecipesContainer />
     </FindRecipeContext.Provider>
