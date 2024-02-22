@@ -13,14 +13,14 @@ import recipeRouter from './routes/recipeRouter.js';
 import userRouter from './routes/userRouter.js';
 import authRouter from './routes/authRouter.js';
 
+//public
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
+import path from 'path';
+
 //middleware
 import errorHandlerMiddleware from './middleware/errorHandlerMiddleware.js';
 import { authMiddleware } from './middleware/authMiddleware.js';
-
-//public
-import path from 'path';
-import { dirname } from 'path';
-import { fileURLToPath } from 'url';
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_API_NAME,
@@ -29,15 +29,15 @@ cloudinary.config({
 });
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
+
+if (process.env.NODE_ENV === 'development') {
+  app.use(morgan('dev'));
+}
+
 app.use(express.static(path.resolve(__dirname, './public')));
 
 app.use(cookieParser());
 app.use(express.json());
-
-//dev logging
-if (process.env.NODE_ENV === 'development') {
-  app.use(morgan('dev'));
-}
 
 app.get('/', (req, res) => {
   res.send('Hello World');
