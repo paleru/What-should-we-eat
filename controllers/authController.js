@@ -3,6 +3,7 @@ import bcrypt from 'bcryptjs';
 import UserModel from '../models/UserModel.js';
 import { UnauthenticatedError } from '../errors/customErrors.js';
 import { createToken } from '../utils/tokenUtils.js';
+import { on } from 'nodemon';
 
 //create a new user with hashed password
 export const register = async (req, res) => {
@@ -29,10 +30,12 @@ export const login = async (req, res) => {
 
   const token = createToken({ userId: user._id, role: user.role });
 
+  const oneDay = 1000 * 60 * 60 * 24;
+
   // expires in one day in milliseconds since 1970
   res.cookie('token', token, {
     httpOnly: true,
-    expires: new Date(Date.now() + 86400000),
+    expires: new Date(Date.now() + oneDay),
     secure: process.env.NODE_ENV === 'production',
   });
 
