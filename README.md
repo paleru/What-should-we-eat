@@ -17,3 +17,4 @@ TODO:
 [] Undo capitalizing units
 [] Ingredients should not require both amount and unit
 [] 'What to cook?' page based on available ingredients
+[] Fix 'newest' showing oldest first when searching recipes and vice versa

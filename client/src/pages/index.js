@@ -4,6 +4,7 @@ export { default as HomeLayout } from './HomeLayout';
 export { default as Register } from './Register';
 export { default as Login } from './Login';
 export { default as Error } from './Error';
+export { default as WhatToCook } from './WhatToCook';
 export { default as FindRecipe } from './FindRecipe';
 export { default as AddRecipe } from './AddRecipe';
 export { default as Profile } from './Profile';
