@@ -8,6 +8,9 @@ import mongoose from 'mongoose';
 import cookieParser from 'cookie-parser';
 import cloudinary from 'cloudinary';
 
+//TODO remove
+console.log('Environment variables:', process.env);
+
 //router
 import recipeRouter from './routes/recipeRouter.js';
 import userRouter from './routes/userRouter.js';
