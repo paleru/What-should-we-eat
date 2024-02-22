@@ -47,7 +47,7 @@ html {
   --grey-800: #1e293b;
   --grey-900: #0f172a;
 
-  --background-color: var(--primary-50);
+  --background-color: #e4ede4;
   --text-color: var(--grey-900);
   --background-secondary-color: #fff;
   --text-secondary-color: var(--grey-500);

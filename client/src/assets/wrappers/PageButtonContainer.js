@@ -15,7 +15,6 @@ const Wrapper = styled.section`
   }
   .page-button {
     background: transparent;
-    border-color: transparent;
     width: 50px;
     height: 40px;
     font-weight: 700;
@@ -26,34 +25,35 @@ const Wrapper = styled.section`
   }
   .active{
     background:var(--primary-600);
-        color: var(--white);
+        color: var(--background-secondary-color);
 
   }
   .prev-button,.next-button{
     background: var(--background-secondary-color);
     border-color: transparent;
-        border-radius: var(--border-radius);
-
+    border: 2px solid var(--primary-600);
+    border-radius: var(--border-radius);
+    font-weight: 700;
     width: 100px;
     height: 40px;
-        color: var(--primary-600);
-text-transform:capitalize;
-letter-spacing:var(--letter-spacing);
-display:flex;
-align-items:center;
-justify-content:center;
-gap:0.5rem;
-cursor:pointer;
+    color: var(--primary-700);
+    text-transform:capitalize;
+    letter-spacing:var(--letter-spacing);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:0.5rem;
+    cursor:pointer;
   }
   .prev-button:hover,.next-button:hover{
     background:var(--primary-600);
-        color: var(--white);
-        transition:var(--transition);
+    color: var(--background-secondary-color);
+    transition:var(--transition);
   }
-.dots{
-  display:grid;
-  place-items:center;
-  cursor:text;
-}
+  .dots{
+    display:grid;
+    place-items:center;
+    cursor:text;
+  }
 `;
 export default Wrapper;

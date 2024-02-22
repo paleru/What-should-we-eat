@@ -1,5 +1,5 @@
 import { FormRow, FormRowMultiple, FormRowSelect, SubmitButton } from '.';
-import Wrapper from '../assets/wrappers/DashboardForm';
+import Wrapper from '../assets/wrappers/SearchContainer';
 import { Form, useSubmit, Link } from 'react-router-dom';
 import { RECIPE_TYPE, RECIPE_SORT_BY } from '../../../utils/constants';
 import { useFindRecipeContext } from '../pages/FindRecipe';
@@ -29,12 +29,14 @@ const SearchContainer = () => {
           <FormRow
             type='search'
             name='search'
+            className='form-row-wide'
             defaultValue={search || ''}
             onChange={debounce((form) => {
               submit(form);
             })}
           />
           <FormRowSelect
+            className='form-select-search'
             name='type'
             labelText='recipe type'
             list={['all', ...Object.values(RECIPE_TYPE)]}
@@ -44,6 +46,7 @@ const SearchContainer = () => {
             }}
           />
           <FormRowSelect
+            className='form-select-search'
             name='sort'
             list={[...Object.values(RECIPE_SORT_BY)]}
             defaultValue={sort || 'newest'}
@@ -55,7 +58,7 @@ const SearchContainer = () => {
             to='/dashboard/recipes'
             className='button form-button delete-button'
           >
-            Tilbakestill søk
+            Tilbakestill
           </Link>
         </div>
       </Form>

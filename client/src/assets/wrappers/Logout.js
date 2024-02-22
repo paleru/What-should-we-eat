@@ -41,7 +41,7 @@ const Wrapper = styled.div`
     height: 100%;
   }
   .dropdown-button:hover {
-    background: #6b1d1d;
+    background: var(--primary-800);
   }
 `;
 
