@@ -3,7 +3,6 @@ import bcrypt from 'bcryptjs';
 import UserModel from '../models/UserModel.js';
 import { UnauthenticatedError } from '../errors/customErrors.js';
 import { createToken } from '../utils/tokenUtils.js';
-import { on } from 'nodemon';
 
 //create a new user with hashed password
 export const register = async (req, res) => {
