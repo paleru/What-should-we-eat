@@ -6,6 +6,7 @@ View website hosted on render here:
 https://what-should-we-eat.onrender.com/
 
 TODO:
+- [ ] Adding images only works when running on loclhost. Fix.
 - [ ] Let user edit recipe steps
 - [ ] Let user upload image when adding recipe
 - [X] File size restrictions when editing recipe image
