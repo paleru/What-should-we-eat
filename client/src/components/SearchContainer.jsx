@@ -58,7 +58,7 @@ const SearchContainer = () => {
             to='/dashboard/recipes'
             className='button form-button delete-button'
           >
-            Tilbakestill
+            Reset
           </Link>
         </div>
       </Form>

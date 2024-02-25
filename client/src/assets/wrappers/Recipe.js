@@ -31,9 +31,11 @@ const Wrapper = styled.article`
     }
     p {
       margin: 0;
-      text-transform: capitalize;
       letter-spacing: var(--letter-spacing);
       color: var(--text-secondary-color);
+    }
+    p:first-letter {
+      text-transform: capitalize;
     }
   }
   .content {

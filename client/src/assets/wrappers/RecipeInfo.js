@@ -12,10 +12,6 @@ const Wrapper = styled.div`
       color: var(--text-secondary-color);
     }
   }
-  .recipe-text {
-    text-transform: capitalize;
-    letter-spacing: var(--letter-spacing);
-  }
 `;
 
 export default Wrapper;

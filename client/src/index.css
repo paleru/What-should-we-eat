@@ -177,8 +177,10 @@ h5 {
   transition: var(--transition);
   display: inline-block;
   border: transparent;
-  text-transform: capitalize;
   box-shadow: var(--shadow-1);
+}
+.button::first-letter {
+  text-transform: capitalize;
 }
 .button:hover {
   background: var(--primary-800);

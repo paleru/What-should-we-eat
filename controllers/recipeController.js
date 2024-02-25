@@ -27,8 +27,8 @@ export const getRecipes = async (req, res) => {
 
   //dynamic sorting options
   const sortOptions = {
-    newest: 'createdAt',
-    oldest: '-createdAt',
+    newest: '-createdAt',
+    oldest: 'createdAt',
     'a-z': 'title',
     'z-a': '-title',
   };
@@ -108,7 +108,6 @@ export const getRecipeById = async (req, res) => {
 export const editRecipeById = async (req, res) => {
   const { id } = req.params;
   const obj = { ...req.body };
-  console.log(obj.ingredients, obj.steps);
 
   //Check if ingredients need to be parsed
   if (obj.ingredients && typeof obj.ingredients === 'string') {
