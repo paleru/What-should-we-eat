@@ -2,10 +2,8 @@ Planned Fullstack web-application using MERN-stack, Vite and styled components.
 
 Work in progress.
 
-Use:
-
-- 'npm run project-setup' to install all dependencies in both root and client
-- 'cd client' and 'npm run dev' to run locally
+View website hosted on render here:
+https://what-should-we-eat.onrender.com/
 
 TODO:
 [] Let user edit recipe steps
