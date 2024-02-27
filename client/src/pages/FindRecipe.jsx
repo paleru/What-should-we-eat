@@ -5,12 +5,11 @@ import { useLoaderData } from 'react-router-dom';
 import { useContext, createContext } from 'react';
 
 export const loader = async ({ request }) => {
-  console.log(request.url);
   //construct a params object based on url search params, use it in axios request
   const params = Object.fromEntries([
     ...new URL(request.url).searchParams.entries(),
   ]);
-  console.log(params);
+
   try {
     const { data } = await baseAxiosFetch.get('/recipes/', { params });
     return { data, searchParams: { ...params } };

@@ -20,7 +20,6 @@ export const getAppStatistics = async (req, res) => {
 export const updateUser = async (req, res) => {
   const obj = { ...req.body };
   delete obj.password;
-  console.log(req.file);
 
   if (req.file) {
     const response = await cloudinary.uploader.upload(req.file.path);

@@ -5,7 +5,6 @@ import PageButtonContainer from './PageButtonContainer';
 
 const RecipesContainer = () => {
   const { data } = useFindRecipeContext();
-  console.log(data);
   const { recipes, recipeCount, pageCount } = data;
   if (recipes.length > 0) {
     return (

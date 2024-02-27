@@ -27,10 +27,6 @@ const FormRowMultiple = ({
     }
   };
 
-  useEffect(() => {
-    console.log(ingredients);
-  }, [ingredients]);
-
   return (
     <div className='form-row'>
       <label htmlFor='name' className='form-label'>

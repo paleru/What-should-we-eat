@@ -10,10 +10,6 @@ const FormRowSteps = ({ steps, setSteps, labelText }) => {
     setStep('');
   };
 
-  useEffect(() => {
-    console.log(steps);
-  }, [steps]);
-
   const handleKeyPress = (event) => {
     if (event.key === 'Enter') {
       event.preventDefault(); // Prevent form submission
