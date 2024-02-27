@@ -5,6 +5,8 @@ Work in progress.
 View website hosted on render here:
 https://what-should-we-eat.onrender.com/
 
+NOTE: it is currently hosted on render's free tier, and in addition to moments of slowness the application will be paused in the case of prolonged inactivity. It can take up to a minute to get it started when visiting the link.
+
 TODO:
 - [ ] Adding images only works when running on loclhost. Fix.
 - [ ] Let user edit recipe steps
