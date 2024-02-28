@@ -53,6 +53,10 @@ html {
   --text-secondary-color: var(--grey-500);
 }
 
+.privacy-policy-link {
+  color: #abcab0;
+}
+
 body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, Roboto;
   font-weight: 500;

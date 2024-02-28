@@ -14,7 +14,7 @@ const Wrapper = styled.section`
     grid-template-columns: 1fr;
     row-gap: 2rem;
   }
-  @media (min-width: 800px) {
+  @media (min-width: 870px) {
     .recipes {
       grid-template-columns: 1fr 1fr;
       gap: 2rem;

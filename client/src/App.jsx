@@ -1,7 +1,9 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import CookieConsent from 'react-cookie-consent';
 import {
   HomeLayout,
   Landing,
+  PrivacyPolicy,
   Register,
   Login,
   DashboardLayout,
@@ -46,6 +48,10 @@ const router = createBrowserRouter([
         path: 'login',
         element: <Login />,
         action: loginAction,
+      },
+      {
+        path: 'privacy-policy',
+        element: <PrivacyPolicy />,
       },
       {
         path: 'dashboard',
@@ -93,6 +99,31 @@ const router = createBrowserRouter([
 ]);
 
 const App = () => {
-  return <RouterProvider router={router} />;
+  return (
+    <div>
+      <CookieConsent
+        location='bottom'
+        buttonText='Accept'
+        cookieName='cookieConsentAccepted'
+        buttonStyle={{
+          backgroundColor: '#47724f',
+          color: 'white',
+          fontSize: '17px',
+          borderRadius: '5px',
+          expiresIn: 365,
+        }}
+      >
+        This website uses cookies to improve functionality and enhance user
+        experience. The site does not utilize third-party cookies. By continuing
+        to use this site, you consent to the use of cookies in accordance with
+        our{' '}
+        <a href='/privacy-policy' className='privacy-policy-link'>
+          Privacy Policy
+        </a>
+        .
+      </CookieConsent>
+      <RouterProvider router={router} />
+    </div>
+  );
 };
 export default App;

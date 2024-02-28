@@ -31,7 +31,7 @@ const Wrapper = styled.section`
   .register-link {
     margin-right: 1rem;
   }
-  .main {
+  .landing-img {
     display: none;
   }
   .button {
@@ -42,7 +42,7 @@ const Wrapper = styled.section`
       grid-template-columns: 1fr 400px;
       column-gap: 3rem;
     }
-    .logo {
+    .landing-img {
       display: block;
     }
   }
