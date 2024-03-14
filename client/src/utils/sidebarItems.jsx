@@ -7,12 +7,6 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 
 const links = [
-  // TODO change path
-  {
-    text: 'What to cook today?',
-    path: 'recipes',
-    icon: <QuestionMarkIcon fontSize='large' />,
-  },
   {
     text: 'find recipe',
     path: 'recipes',

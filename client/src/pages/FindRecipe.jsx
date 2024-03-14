@@ -23,6 +23,7 @@ const FindRecipeContext = createContext();
 
 const FindRecipe = () => {
   const { data, searchParams } = useLoaderData();
+
   return (
     //pass data and searchParams to context
     <FindRecipeContext.Provider value={{ data, searchParams }}>

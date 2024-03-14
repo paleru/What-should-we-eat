@@ -5,55 +5,108 @@ import { promises as fs } from 'fs';
 
 //get all recipes
 export const getRecipes = async (req, res) => {
-  //search for recipes by title
-  const { search, type, sort } = req.query;
-
-  //create an empty object to store the query
+  const { search, ingredients, type, sort } = req.query;
   const queryObject = {};
 
-  //add search query to query object only if present (prevents empty search query from returning no recipes - returns all instead)
-  if (search) {
-    //MongoDB query object that searches for documents where search matches the recipe title or type case-insensitively.
+  if (search && search.trim() !== '') {
     queryObject.$or = [
       { title: { $regex: search, $options: 'i' } },
       { 'ingredients.name': { $regex: search, $options: 'i' } },
     ];
   }
 
-  //add type to query, ignore if user chose 'all' (returns all recipes regardless of type)
   if (type && type !== 'all') {
     queryObject.type = type;
   }
 
-  //dynamic sorting options
-  const sortOptions = {
-    newest: '-createdAt',
-    oldest: 'createdAt',
-    'a-z': 'title',
-    'z-a': '-title',
-  };
+  //if user provides ingredients, retrieve recipes and sort by matching ingredients
+  if (ingredients) {
+    const ingredientsArray = ingredients.split(',');
 
-  //sort by newest by default, or by user choice
-  const sortBy = sortOptions[sort] || sortOptions.newest;
+    if (ingredientsArray.length > 0) {
+      const regexIngredients = ingredientsArray.map(
+        (ingredient) => new RegExp(ingredient.trim(), 'i')
+      );
+      queryObject['ingredients.name'] = { $in: regexIngredients };
 
-  //pagination
-  const page = Number(req.query.page) || 1;
-  const limit = Number(req.query.limit) || 12;
-  //calculate how many recipes to skip to get to the current page (e.g. page 2 = 2 - 1 * 12 = skip 12 recipes, page 3 = skip 24 recipes, etc.)
-  const skip = (page - 1) * limit;
+      //define aggregation pipeline for sorting by matching ingredients and retrieve recipes
+      const pipeline = [
+        { $match: queryObject },
+        {
+          $project: {
+            title: 1,
+            description: 1,
+            steps: 1,
+            ingredients: 1,
+            type: 1,
+            createdBy: 1,
+            createdAt: 1,
+            updatedAt: 1,
+            image: 1,
+            //score is equal to the number of matching ingredients
+            score: {
+              $size: {
+                $setIntersection: ['$ingredients.name', ingredientsArray],
+              },
+            },
+          },
+        },
+        { $sort: { score: -1 } },
+      ];
 
-  //find recipes that match the query object, sort by the user's choice, and limit to 12 recipes
-  const recipes = await RecipeModel.find(queryObject)
-    .sort(sortBy)
-    .skip(skip)
-    .limit(limit);
+      try {
+        const recipes = await RecipeModel.aggregate(pipeline);
+        return res.status(StatusCodes.OK).json({ recipes });
+      } catch (error) {
+        console.error('Error:', error);
+        return res
+          .status(StatusCodes.INTERNAL_SERVER_ERROR)
+          .json({ message: 'Internal server error' });
+      }
+    }
+  }
 
-  //count the total number of recipes that match the query object, not affected by the limit
-  const recipeCount = await RecipeModel.countDocuments(queryObject);
-  const pageCount = Math.ceil(recipeCount / limit);
-  res
-    .status(StatusCodes.OK)
-    .json({ recipeCount, pageCount, currentPage: page, recipes });
+  //if no ingredients are provided or the ingredients array is empty, retrieve all recipes without sorting by matching ingredients
+  try {
+    const sortOptions = {
+      //users can sort by newest, oldest or alphabetically
+      newest: '-createdAt',
+      oldest: 'createdAt',
+      'a-z': 'title',
+      'z-a': '-title',
+    };
+    const sortBy = sortOptions[sort] || sortOptions.newest;
+
+    //pagination
+    //default page is 1, default limit is 12
+    const page = Number(req.query.page) || 1;
+    const limit = Number(req.query.limit) || 12;
+    //calculate how many recipes to skip when switching pages
+    const skip = (page - 1) * limit;
+
+    //find recipes based on queryObject, sort by sortBy, skip and limit the results
+    const recipes = await RecipeModel.find(queryObject)
+      .sort(sortBy)
+      .skip(skip)
+      .limit(limit);
+
+    const recipeCount = await RecipeModel.countDocuments(queryObject);
+    const pageCount = Math.ceil(recipeCount / limit);
+
+    res.status(StatusCodes.OK).json({
+      recipeCount,
+      pageCount,
+      queryObject,
+      ingredients,
+      currentPage: page,
+      recipes,
+    });
+  } catch (error) {
+    console.error('Error:', error);
+    res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ message: 'Internal server error' });
+  }
 };
 
 //get all recipes created by current user
@@ -85,7 +138,7 @@ export const getRecipesByIngredients = async (req, res) => {
 
   const ingredientList = ingredients
     .split(',')
-    .map((ingredient) => decodeURIComponent(ingredient));
+    .map((ingredient) => decodeURIComponent(ingredient).toLowerCase());
 
   const recipes = await RecipeModel.find({
     ingredients: {

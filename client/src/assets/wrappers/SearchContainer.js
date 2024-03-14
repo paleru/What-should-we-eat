@@ -44,6 +44,26 @@ const Wrapper = styled.section`
     cursor: pointer;
   }
 
+  .added-ingredients {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    spacing: 1rem;
+    direction: row;
+  }
+
+  .added-ingredient {
+    margin: 0.5rem;
+    button {
+      background-color: var(--grey-700);
+      padding: 0.5rem;
+    }
+    button:hover {
+      background-color: var(--grey-900);
+    }
+  }
+
   @media (max-width: 800px) {
     .form-button,
     .form-row-wide {

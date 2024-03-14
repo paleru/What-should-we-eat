@@ -8,7 +8,6 @@ import {
   Login,
   DashboardLayout,
   Error,
-  //WhatToCook,
   FindRecipe,
   Profile,
   AddRecipe,
@@ -21,7 +20,6 @@ import { action as registerAction } from './pages/Register';
 import { action as loginAction } from './pages/Login';
 import { action as addRecipeAction } from './pages/AddRecipe';
 import { loader as dashboardLoader } from './pages/DashboardLayout';
-//import { loader as WhatToCookLoader } from './pages/WhatToCook';
 import { loader as findRecipeLoader } from './pages/FindRecipe';
 import { loader as editRecipeLoader } from './pages/EditRecipe';
 import { action as editRecipeAction } from './pages/EditRecipe';
@@ -58,12 +56,6 @@ const router = createBrowserRouter([
         element: <DashboardLayout />,
         loader: dashboardLoader,
         children: [
-          /* TODO create and make this index
-          {
-            index: true,
-            element: <WhatToCook />,
-            loader: WhatToCookLoader,
-          }, */
           {
             index: true,
             path: 'recipes',
