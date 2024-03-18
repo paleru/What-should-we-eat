@@ -101,6 +101,13 @@ const SearchContainer = () => {
               submit(e.currentTarget.form);
             }}
           />
+          <Link
+            to='/dashboard/recipes'
+            className='button form-button delete-button'
+            onClick={handleIngredientReset}
+          >
+            Reset
+          </Link>
           <FormRowIngredients
             type='ingredients'
             name='ingredients'
@@ -109,27 +116,20 @@ const SearchContainer = () => {
             setIngredients={setIngredientList} // Pass setIngredientList
             defaultValue={searchParams.ingredients || []}
           />
-          <Link
-            to='/dashboard/recipes'
-            className='button form-button delete-button'
-            onClick={handleIngredientReset}
-          >
-            Reset
-          </Link>
+          <div className='added-ingredients'>
+            {ingredientList.map((ingredient, index) => (
+              <div key={index} className='added-ingredient'>
+                <button
+                  className='button button-block'
+                  onClick={() => handleIngredientRemove(ingredient)}
+                >
+                  {ingredient}
+                </button>
+              </div>
+            ))}
+          </div>
         </div>
       </Form>
-      <div className='added-ingredients'>
-        {ingredientList.map((ingredient, index) => (
-          <div key={index} className='added-ingredient'>
-            <button
-              className='button button-block'
-              onClick={() => handleIngredientRemove(ingredient)}
-            >
-              {ingredient}
-            </button>
-          </div>
-        ))}
-      </div>
     </Wrapper>
   );
 };

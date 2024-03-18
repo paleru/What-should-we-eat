@@ -21,6 +21,7 @@ const Recipe = ({
   createdAt,
   updatedAt,
   image,
+  score,
 }) => {
   const createdDate = day(createdAt).format('Do MMMM YYYY');
   //const updatedDate = day(updatedAt).format('Do MMMM YYYY');
