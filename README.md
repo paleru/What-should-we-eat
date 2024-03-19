@@ -8,7 +8,7 @@ https://what-should-we-eat.onrender.com/
 NOTE: it is currently hosted on render's free tier, and in addition to moments of slowness the application will be paused in the case of prolonged inactivity. It can take up to a minute to get it started when visiting the link.
 
 TODO:
-- [ ] Adding images only works when running on loclhost. Fix.
+- [ ] Adding images only works when running on localhost. Fix.
 - [ ] Let user edit recipe steps
 - [ ] Let user upload image when adding recipe
 - [X] File size restrictions when editing recipe image
@@ -17,5 +17,5 @@ TODO:
 - [X] Steps/ingredients should not be allowed to be empty when adding recipes
 - [ ] Undo capitalizing units
 - [ ] Ingredients should not require both amount and unit
-- [ ] 'What to cook?' page based on available ingredients
+- [X] 'What to cook?' page based on available ingredients (implemented in 'find recipe' instead')
 - [ ] Fix 'newest' showing oldest first when searching recipes and vice versa
