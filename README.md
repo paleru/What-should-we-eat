@@ -5,7 +5,7 @@ Work in progress.
 View website hosted on render here:
 https://what-should-we-eat.onrender.com/
 
-NOTE: it is currently hosted on render's free tier, and in addition to moments of slowness the application will be paused in the case of prolonged inactivity. It can take up to a minute to get it started when visiting the link.
+NOTE: The application is currently hosted on render's free tier. It will be paused in the case of prolonged inactivity, meaning it will usually take up to a minute to get it started when visiting the link (in addition to slow load times).
 
 TODO:
 - [ ] Adding images only works when running on localhost. Fix.
