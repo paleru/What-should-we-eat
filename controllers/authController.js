@@ -16,7 +16,6 @@ export const register = async (req, res) => {
 
 //login user and create token
 export const login = async (req, res) => {
-  console.log('environment variables in authcontroller:', process.env);
   const user = await UserModel.findOne({ email: req.body.email });
   if (!user) throw new UnauthenticatedError('invalid login credentials');
 

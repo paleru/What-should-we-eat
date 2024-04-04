@@ -1,7 +1,7 @@
 import RecipeModel from '../models/RecipeModel.js';
 import { StatusCodes } from 'http-status-codes';
 import { v2 as cloudinary } from 'cloudinary';
-import { promises as fs } from 'fs';
+import { dataUri } from '../middleware/multerMiddleware.js';
 
 //get all recipes
 export const getRecipes = async (req, res) => {
@@ -173,10 +173,10 @@ export const editRecipeById = async (req, res) => {
   }
 
   if (req.file) {
+    const file = dataUri(req.file);
     //Upload image to cloudinary
-    const response = await cloudinary.uploader.upload(req.file.path);
-    //Delete image from public folder
-    await fs.unlink(req.file.path);
+    const response = await cloudinary.uploader.upload(file);
+
     obj.image = response.secure_url;
     obj.imagePublicId = response.public_id;
   }
