@@ -9,7 +9,7 @@ Functionality:
 
 Work in progress.
 
-NOTE: The application is currently hosted on render's free tier, leading to slower load times. It will also be paused in the case of prolonged inactivity, meaning it will usually take up to a minute to get it startet when the link is visited for the first time in a while. 
+NOTE: The application is currently hosted on render's free tier, meaning it will usually take up to a minute to get it started when the site hasn't been visited in a couple of hours. It can also slightly impact performance when using the site. 
 
 View website hosted on render here:
 https://what-should-we-eat.onrender.com/
