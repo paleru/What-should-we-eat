@@ -1,4 +1,4 @@
-Planned Fullstack web-application using MERN-stack, Vite and styled components.
+Fullstack web-application using MERN-stack, Vite and styled components.
 
 Work in progress.
 
