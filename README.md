@@ -1,11 +1,18 @@
-Fullstack web-application using MERN-stack, Vite and styled components.
+Fullstack web-application using the MERN-stack, built with Vite.
+
+Functionality:
+* User registration.
+* Signed in user can add recipes. Users can also edit or delete their own recipes.
+* Search for recipes.
+* Filter recipes based on recipe type dropdown or/and adding ingredients.
+* Admin-panel (for admin-user only) showing real-time data for number of users and recipes.
 
 Work in progress.
 
+NOTE: The application is currently hosted on render's free tier, leading to slower load times. It will also be paused in the case of prolonged inactivity, meaning it will usually take up to a minute to get it startet when the link is visited for the first time in a while. 
+
 View website hosted on render here:
 https://what-should-we-eat.onrender.com/
-
-NOTE: The application is currently hosted on render's free tier. It will be paused in the case of prolonged inactivity, meaning it will usually take up to a minute to get it started when visiting the link (in addition to slow load times).
 
 TODO:
 - [ ] Adding images only works when running on localhost. Fix.
