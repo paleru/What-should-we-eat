@@ -1,8 +1,8 @@
-Fullstack web-application using the MERN-stack, built with Vite.
+Fullstack web-application using the MERN-stack, built with Vite. It also utilizes styled components, nodemon
 
 Functionality:
-* User registration.
-* Signed in user can add recipes. Users can also edit or delete their own recipes.
+* User registration, users stored in DB (passwords are hashed).
+* Signed in user can add recipes, also stored in DB. Users can also edit or delete their own recipes. 
 * Search for recipes.
 * Filter recipes based on recipe type dropdown or/and adding ingredients.
 * Admin-panel (for admin-user only) showing real-time data for number of users and recipes.
